@@ -12,11 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/efacsen/pak-lurah-discord-music-bot.git"
+    "url": "https://github.com/efacsen/morty-discord-music-bot.git"
   },
-  "homepage": "https://github.com/efacsen/pak-lurah-discord-music-bot#readme",
+  "homepage": "https://github.com/efacsen/morty-discord-music-bot#readme",
   "bugs": {
-    "url": "https://github.com/efacsen/pak-lurah-discord-music-bot/issues"
+    "url": "https://github.com/efacsen/morty-discord-music-bot/issues"
   },
   "keywords": [
     "discord",

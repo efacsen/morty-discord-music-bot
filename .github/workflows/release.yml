@@ -24,8 +24,8 @@ jobs:
           # Create a clean archive excluding dev files
           mkdir -p dist
           git archive --format=zip HEAD \
-            --prefix=pak-lurah-discord-music-bot/ \
-            -o dist/pak-lurah-discord-music-bot-${{ steps.version.outputs.VERSION }}.zip
+            --prefix=morty-discord-music-bot/ \
+            -o dist/morty-discord-music-bot-${{ steps.version.outputs.VERSION }}.zip
 
       - name: Extract changelog for this version
         id: changelog
