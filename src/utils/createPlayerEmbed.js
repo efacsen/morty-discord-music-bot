@@ -8,17 +8,17 @@ import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'disc
  */
 export function createPlayerEmbed(track, queue) {
     const embed = new EmbedBuilder()
-        .setColor('#5865F2') // Discord Blurple
-        .setTitle('🎵 Now Playing')
+        .setColor('#97CE4C') // Portal green
+        .setTitle('Now Playing')
         .setDescription(`**${track.title}**`)
         .addFields(
-            { name: '👤 Artist', value: track.author || 'Unknown', inline: true },
-            { name: '⏱️ Duration', value: track.duration || 'Unknown', inline: true },
-            { name: '📝 Requested by', value: track.requestedBy?.tag || 'Unknown', inline: true }
+            { name: 'Artist', value: track.author || 'Unknown', inline: true },
+            { name: 'Duration', value: track.duration || 'Unknown', inline: true },
+            { name: 'Requested by', value: track.requestedBy?.tag || 'Unknown', inline: true }
         )
         .setThumbnail(track.thumbnail || null)
         .setFooter({
-            text: `Queue: ${queue.tracks.data.length} song${queue.tracks.data.length !== 1 ? 's' : ''} remaining`
+            text: `Morty Bot | ${queue.tracks.data.length} song${queue.tracks.data.length !== 1 ? 's' : ''} remaining`
         })
         .setTimestamp();
 
@@ -95,8 +95,8 @@ export function createQueueEmbed(queue, page = 0) {
     const currentPage = Math.min(page, totalPages - 1);
 
     const embed = new EmbedBuilder()
-        .setColor('#5865F2')
-        .setTitle('📋 Queue')
+        .setColor('#97CE4C')
+        .setTitle('Queue')
         .setTimestamp();
 
     // Current track
@@ -228,7 +228,7 @@ export function createPlaylistEmbed(playlist, tracks, requestedBy) {
         : trackPreview;
 
     const embed = new EmbedBuilder()
-        .setColor('#FF0000') // YouTube red
+        .setColor('#97CE4C') // Portal green
         .setTitle('Playlist Added')
         .setDescription(`**[${playlist.title}](${playlist.url})**`)
         .addFields(

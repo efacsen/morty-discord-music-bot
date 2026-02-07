@@ -1,10 +1,9 @@
 @echo off
-REM Discord Music Bot - Stop Script (Windows)
-
+title Morty Music Bot - Stopping
 echo.
-echo ================================================
-echo    Discord Music Bot - Stopping...
-echo ================================================
+echo   ==============================================
+echo    Morty Music Bot - Stopping...
+echo   ==============================================
 echo.
 
 REM Find and kill all node processes running the bot
@@ -17,6 +16,6 @@ for /f "tokens=2" %%i in ('tasklist /FI "IMAGENAME eq node.exe" /NH 2^>NUL') do 
 
 timeout /t 2 /nobreak >NUL
 
-echo [SUCCESS] Bot stopped successfully!
+echo [SUCCESS] Morty has left the building. Bye!
 echo.
 pause

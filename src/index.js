@@ -58,12 +58,12 @@ player.events.on('debug', (queue, message) => {
 // Error handlers
 player.events.on('playerError', (queue, error) => {
     console.error(`[Player Error] ${error.message}`);
-    queue.metadata.channel.send(`❌ Error playing track: ${error.message}`);
+    queue.metadata.channel.send(`Aw geez, something broke: ${error.message}`);
 });
 
 player.events.on('error', (queue, error) => {
     console.error(`[Queue Error] ${error.message}`);
-    queue.metadata.channel.send(`❌ Queue error: ${error.message}`);
+    queue.metadata.channel.send(`Oh no, oh geez! Queue error: ${error.message}`);
 });
 
 // Player event handlers
@@ -124,17 +124,17 @@ player.events.on('audioTracksAdd', (queue, tracks) => {
 
 player.events.on('disconnect', (queue) => {
     console.log('👋 Disconnected from voice channel');
-    queue.metadata.channel.send('👋 Disconnected from voice channel!');
+    queue.metadata.channel.send('Oh geez, I-I gotta go... Disconnected!');
 });
 
 player.events.on('emptyChannel', (queue) => {
     console.log('🚪 Voice channel is empty, leaving...');
-    queue.metadata.channel.send('🚪 Leaving voice channel due to inactivity...');
+    queue.metadata.channel.send('Aw man, everyone left... I-I\'ll just go too.');
 });
 
 player.events.on('emptyQueue', (queue) => {
     console.log('✅ Queue finished');
-    queue.metadata.channel.send('✅ Queue finished!');
+    queue.metadata.channel.send('That\'s all the songs! W-we\'re done, I think.');
 });
 
 player.events.on('error', (queue, error) => {

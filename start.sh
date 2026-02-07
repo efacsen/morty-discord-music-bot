@@ -1,17 +1,28 @@
 #!/bin/bash
 
-# Discord Music Bot - Start Script (macOS/Linux)
+# Morty Music Bot - Start Script (macOS/Linux)
 
 # Colors for output
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RED='\033[0;31m'
+CYAN='\033[0;36m'
+YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 echo ""
-echo -e "${BLUE}╔════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║   Discord Music Bot - Starting...         ║${NC}"
-echo -e "${BLUE}╚════════════════════════════════════════════╝${NC}"
+echo -e "${CYAN}"
+cat << 'EOF'
+  __  __            _
+ |  \/  | ___  _ __| |_ _   _
+ | |\/| |/ _ \| '__| __| | | |
+ | |  | | (_) | |  | |_| |_| |
+ |_|  |_|\___/|_|   \__|\__, |
+                         |___/
+EOF
+echo -e "${NC}"
+echo -e "  ${CYAN}Discord Music Bot v2.1.0${NC}"
+echo -e "  ${YELLOW}\"Oh geez, h-here we go!\"${NC}"
 echo ""
 
 # Check if .env exists
@@ -29,7 +40,7 @@ if pgrep -f "node src/index.js" > /dev/null; then
 fi
 
 # Start the bot
-echo -e "${GREEN}✓${NC} Starting Discord Music Bot..."
+echo -e "${GREEN}✓${NC} Starting Morty Music Bot..."
 echo -e "${BLUE}ℹ${NC} Press Ctrl+C to stop the bot"
 echo ""
 

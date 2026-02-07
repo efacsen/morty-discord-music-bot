@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Discord Music Bot - Automated Setup Script (macOS/Linux)
-# This script will install all dependencies and configure the bot for you
+# Morty Music Bot - Automated Setup Script (macOS/Linux)
 
 set -e  # Exit on error
 
@@ -10,6 +9,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Print colored output
@@ -19,9 +19,18 @@ print_info() { echo -e "${BLUE}ℹ${NC} $1"; }
 print_warning() { echo -e "${YELLOW}⚠${NC} $1"; }
 
 echo ""
-echo "╔════════════════════════════════════════════╗"
-echo "║   Discord Music Bot - Automated Setup     ║"
-echo "╚════════════════════════════════════════════╝"
+echo -e "${CYAN}"
+cat << 'EOF'
+  __  __            _
+ |  \/  | ___  _ __| |_ _   _
+ | |\/| |/ _ \| '__| __| | | |
+ | |  | | (_) | |  | |_| |_| |
+ |_|  |_|\___/|_|   \__|\__, |
+                         |___/
+EOF
+echo -e "${NC}"
+echo -e "  ${CYAN}Discord Music Bot v2.1.0${NC}"
+echo -e "  ${YELLOW}\"Oh geez, l-let me set this up for you!\"${NC}"
 echo ""
 
 # Check if running on macOS or Linux
@@ -154,45 +163,28 @@ DISCORD_CLIENT_ID=$CLIENT_ID
 DISCORD_GUILD_ID=$GUILD_ID
 
 # YouTube Configuration (Optional)
-# Only needed for age-restricted or private videos
 # YOUTUBE_COOKIE_PATH=./youtube_cookies.txt
 EOF
 
     print_success ".env file created"
 fi
 
-# Configure yt-dlp path in extractor
-echo ""
-print_info "Configuring yt-dlp path..."
-YTDLP_PATH=$(which yt-dlp)
-print_info "Found yt-dlp at: $YTDLP_PATH"
-
-# Update YtDlpExtractor.js with the correct path
-if [ -f "src/extractors/YtDlpExtractor.js" ]; then
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        sed -i '' "s|this.ytDlp = new YTDlpWrap('.*')|this.ytDlp = new YTDlpWrap('$YTDLP_PATH')|g" src/extractors/YtDlpExtractor.js
-    else
-        sed -i "s|this.ytDlp = new YTDlpWrap('.*')|this.ytDlp = new YTDlpWrap('$YTDLP_PATH')|g" src/extractors/YtDlpExtractor.js
-    fi
-    print_success "yt-dlp path configured"
-fi
-
 # Final success message
 echo ""
-echo "╔════════════════════════════════════════════╗"
-echo "║          Setup Complete! 🎉                ║"
-echo "╚════════════════════════════════════════════╝"
-echo ""
+echo -e "${GREEN}"
+cat << 'EOF'
+  ================================================
+           Setup Complete!
+  ================================================
+EOF
+echo -e "${NC}"
 print_success "All dependencies installed and configured!"
 echo ""
-print_info "To start your bot, run:"
-echo "  ${GREEN}npm start${NC}"
+print_info "To start the bot, run:"
+echo -e "  ${GREEN}./start.sh${NC}"
 echo ""
-print_info "Or use the convenience scripts:"
-echo "  ${GREEN}./start.sh${NC}  - Start the bot"
-echo "  ${GREEN}./stop.sh${NC}   - Stop the bot"
+print_info "To stop the bot:"
+echo -e "  ${GREEN}./stop.sh${NC}"
 echo ""
-print_info "Need help? Check the documentation:"
-echo "  - README.md - Getting started guide"
-echo "  - TROUBLESHOOTING.md - Common issues and fixes"
+echo -e "  ${YELLOW}\"Alright, w-we're good to go!\"${NC}"
 echo ""

@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.1.0] - 2026-02-07
 
 ### Added
+- **Morty branding** — full rebrand with ASCII art logo, portal green embeds, and Morty-flavored bot messages
+- **Open-source credits** — "Made by efacsen with Claude" attribution throughout
 - **YouTube playlist support** — use `/play` with any YouTube playlist URL to load all tracks
 - **Rich playlist embed** — shows playlist title, track count, total duration, and a 5-track preview
 - **Portable Windows package** — `setup.bat` downloads Node.js, FFmpeg, and yt-dlp into a local `runtime/` folder (no admin rights or system installs needed)
