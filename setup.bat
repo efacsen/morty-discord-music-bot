@@ -9,7 +9,7 @@ echo    M M M O   O RRRR    T     Y
 echo    M   M O   O R  R    T     Y
 echo    M   M  OOO  R   R   T     Y
 echo.
-echo      Discord Music Bot v2.1.0
+echo      Discord Music Bot v3.0.0
 echo      "Oh geez, l-let me set this up for you!"
 echo.
 echo   ==============================================

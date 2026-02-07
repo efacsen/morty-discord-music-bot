@@ -1,6 +1,6 @@
 {
   "name": "morty-music-bot",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Morty Music Bot - A free, open-source Discord music bot with YouTube support. Made by efacsen with Claude.",
   "main": "src/index.js",
   "type": "module",
