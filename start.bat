@@ -1,16 +1,25 @@
 @echo off
-title Pak Lurah Music Bot
+title Morty Music Bot
 cd /d "%~dp0"
 
 echo.
-echo ================================================
-echo    Pak Lurah Music Bot - Starting...
-echo ================================================
+echo   ==============================================
+echo.
+echo    M   M  OOO  RRRR  TTTTT Y   Y
+echo    MM MM O   O R   R   T    Y Y
+echo    M M M O   O RRRR    T     Y
+echo    M   M O   O R  R    T     Y
+echo    M   M  OOO  R   R   T     Y
+echo.
+echo      Discord Music Bot v2.1.0
+echo      "Oh geez, h-here we go!"
+echo.
+echo   ==============================================
 echo.
 
 REM Check if .env exists
 if not exist ".env" (
-    echo [ERROR] .env file not found!
+    echo [ERROR] Aw geez, .env file not found!
     echo         Please run setup.bat first.
     echo.
     pause
@@ -40,7 +49,7 @@ node src/index.js
 
 if %errorlevel% neq 0 (
     echo.
-    echo [ERROR] Bot exited with an error.
+    echo [ERROR] Aw geez, the bot crashed.
     echo         Check the output above for details.
     echo.
     pause

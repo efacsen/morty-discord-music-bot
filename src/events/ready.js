@@ -6,9 +6,9 @@ export default {
     async execute(client) {
         console.log(`✅ Logged in as ${client.user.tag}`);
 
-        // Set bot presence - Customize this!
+        // Set bot presence
         client.user.setPresence({
-            activities: [{ name: 'your favorite tunes 🎶', type: ActivityType.Listening }],
+            activities: [{ name: 'Oh geez, music!', type: ActivityType.Listening }],
             status: 'online',
         });
 

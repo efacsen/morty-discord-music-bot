@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Discord Music Bot - Stop Script (macOS/Linux)
+# Morty Music Bot - Stop Script (macOS/Linux)
 
 # Colors for output
 GREEN='\033[0;32m'
@@ -9,9 +9,9 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 echo ""
-echo -e "${BLUE}╔════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║   Discord Music Bot - Stopping...         ║${NC}"
-echo -e "${BLUE}╚════════════════════════════════════════════╝${NC}"
+echo -e "${BLUE}================================================${NC}"
+echo -e "${BLUE} Morty Music Bot - Stopping...${NC}"
+echo -e "${BLUE}================================================${NC}"
 echo ""
 
 # Check if bot is running
@@ -33,5 +33,5 @@ if pgrep -f "node src/index.js" > /dev/null; then
     sleep 1
 fi
 
-echo -e "${GREEN}✓${NC} Bot stopped successfully!"
+echo -e "${GREEN}✓${NC} Morty has left the building. Bye!"
 echo ""
