@@ -118,6 +118,10 @@ player.events.on('audioTrackAdd', (queue, track) => {
     }
 });
 
+player.events.on('audioTracksAdd', (queue, tracks) => {
+    console.log(`➕ Added ${tracks.length} tracks to queue (playlist)`);
+});
+
 player.events.on('disconnect', (queue) => {
     console.log('👋 Disconnected from voice channel');
     queue.metadata.channel.send('👋 Disconnected from voice channel!');

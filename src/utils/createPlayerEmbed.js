@@ -196,3 +196,52 @@ export function createQueueEmbed(queue, page = 0) {
 
     return { embeds: [embed], components };
 }
+
+/**
+ * Creates a rich embed for playlist additions
+ * @param {Object} playlist - Playlist info { title, url, thumbnail, tracks }
+ * @param {Track[]} tracks - Array of tracks added
+ * @param {User} requestedBy - The user who requested the playlist
+ * @returns {Object} { embeds, components: [] }
+ */
+export function createPlaylistEmbed(playlist, tracks, requestedBy) {
+    // Calculate total duration from track duration strings
+    const totalSeconds = tracks.reduce((total, track) => {
+        const parts = (track.duration || '0:00').split(':').map(Number);
+        if (parts.length === 3) return total + parts[0] * 3600 + parts[1] * 60 + parts[2];
+        if (parts.length === 2) return total + parts[0] * 60 + parts[1];
+        return total;
+    }, 0);
+
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const totalDuration = hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+
+    // Preview first 5 tracks
+    const previewCount = Math.min(tracks.length, 5);
+    const trackPreview = tracks.slice(0, previewCount).map((track, i) =>
+        `**${i + 1}.** ${track.title} (${track.duration || 'N/A'})`
+    ).join('\n');
+    const remaining = tracks.length - previewCount;
+    const previewText = remaining > 0
+        ? `${trackPreview}\n*...and ${remaining} more track${remaining !== 1 ? 's' : ''}*`
+        : trackPreview;
+
+    const embed = new EmbedBuilder()
+        .setColor('#FF0000') // YouTube red
+        .setTitle('Playlist Added')
+        .setDescription(`**[${playlist.title}](${playlist.url})**`)
+        .addFields(
+            { name: 'Tracks', value: `${tracks.length}`, inline: true },
+            { name: 'Duration', value: totalDuration, inline: true },
+            { name: 'Requested by', value: requestedBy?.tag || 'Unknown', inline: true },
+            { name: 'Track List', value: previewText, inline: false }
+        )
+        .setTimestamp();
+
+    if (playlist.thumbnail) {
+        embed.setThumbnail(playlist.thumbnail);
+    }
+
+    return { embeds: [embed], components: [] };
+}
