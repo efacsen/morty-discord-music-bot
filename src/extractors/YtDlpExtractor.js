@@ -1,14 +1,53 @@
 import { BaseExtractor, QueryType, Track } from 'discord-player';
+import { execSync } from 'child_process';
 import pkg from 'yt-dlp-wrap';
 const { default: YTDlpWrap } = pkg;
+
+/**
+ * Find yt-dlp binary path across platforms (macOS, Linux, Windows)
+ */
+function findYtDlpPath() {
+    // Check common locations in order of priority
+    const candidates = [
+        process.env.YTDLP_PATH,            // User-specified via env var
+        '/usr/local/bin/yt-dlp',            // Linux / macOS (manual install)
+        '/usr/bin/yt-dlp',                  // Linux (package manager)
+        '/opt/homebrew/bin/yt-dlp',         // macOS (Homebrew ARM)
+        '/usr/local/Cellar/yt-dlp',         // macOS (Homebrew Intel)
+    ].filter(Boolean);
+
+    for (const path of candidates) {
+        try {
+            execSync(`"${path}" --version`, { stdio: 'ignore' });
+            return path;
+        } catch {
+            // Not found at this path, try next
+        }
+    }
+
+    // Fallback: rely on system PATH (works on all platforms including Windows)
+    try {
+        execSync('yt-dlp --version', { stdio: 'ignore' });
+        return 'yt-dlp';
+    } catch {
+        throw new Error(
+            'yt-dlp not found. Install it:\n' +
+            '  Windows: winget install yt-dlp  (or download from github.com/yt-dlp/yt-dlp)\n' +
+            '  macOS:   brew install yt-dlp\n' +
+            '  Linux:   sudo apt install yt-dlp  (or pip install yt-dlp)\n' +
+            '  Or set YTDLP_PATH environment variable to the yt-dlp binary path.'
+        );
+    }
+}
 
 export class YtDlpExtractor extends BaseExtractor {
     static identifier = 'com.discord-player.ytdlpextractor';
 
     constructor(context, options) {
         super(context, options);
-        // Use system yt-dlp installation
-        this.ytDlp = new YTDlpWrap('/opt/homebrew/bin/yt-dlp');
+        const ytDlpPath = findYtDlpPath();
+        console.log(`[YtDlp] Using binary: ${ytDlpPath}`);
+        this.ytDlp = new YTDlpWrap(ytDlpPath);
     }
 
     async activate() {
