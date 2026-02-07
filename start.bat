@@ -1,31 +1,47 @@
 @echo off
-REM Discord Music Bot - Start Script (Windows)
+title Pak Lurah Music Bot
+cd /d "%~dp0"
 
 echo.
 echo ================================================
-echo    Discord Music Bot - Starting...
+echo    Pak Lurah Music Bot - Starting...
 echo ================================================
 echo.
 
 REM Check if .env exists
 if not exist ".env" (
     echo [ERROR] .env file not found!
-    echo [INFO] Please run 'setup.bat' first to configure the bot.
+    echo         Please run setup.bat first.
+    echo.
     pause
     exit /b 1
 )
 
-REM Check if bot is already running
-tasklist /FI "IMAGENAME eq node.exe" /FI "WINDOWTITLE eq *index.js*" 2>NUL | find /I /N "node.exe">NUL
-if "%ERRORLEVEL%"=="0" (
-    echo [WARNING] Bot may already be running!
-    echo [INFO] Use 'stop.bat' to stop it first.
-    pause
+REM Use portable runtime if available, otherwise use system PATH
+if exist "runtime\node\node.exe" (
+    set "PATH=%~dp0runtime\node;%~dp0runtime;%PATH%"
+    echo [INFO] Using portable runtime
+) else (
+    echo [INFO] Using system-installed tools
+    where node >nul 2>&1
+    if %errorlevel% neq 0 (
+        echo [ERROR] Node.js not found!
+        echo         Run setup.bat to install, or install Node.js manually.
+        echo.
+        pause
+        exit /b 1
+    )
 )
 
-REM Start the bot
-echo [SUCCESS] Starting Discord Music Bot...
 echo [INFO] Press Ctrl+C to stop the bot
 echo.
 
-npm start
+node src/index.js
+
+if %errorlevel% neq 0 (
+    echo.
+    echo [ERROR] Bot exited with an error.
+    echo         Check the output above for details.
+    echo.
+    pause
+)

@@ -14,6 +14,9 @@ youtube_cookies.txt
 # Temp/cache files
 *-player-script.js
 
+# Portable runtime (downloaded by setup.bat)
+runtime/
+
 # Binaries (should be installed via package managers)
 yt-dlp
 ffmpeg
