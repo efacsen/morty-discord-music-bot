@@ -63,7 +63,7 @@ This is a passion project built in spare time. It's completely free — no paywa
 
 No admin rights needed. Everything downloads into the project folder.
 
-1. Download the [latest release](https://github.com/efacsen/pak-lurah-discord-music-bot/releases) and extract the ZIP
+1. Download the [latest release](https://github.com/efacsen/morty-discord-music-bot/releases) and extract the ZIP
 2. Double-click **`setup.bat`** — downloads Node.js, FFmpeg, yt-dlp and asks for your bot token
 3. Double-click **`start.bat`** — Morty is online
 
@@ -72,8 +72,8 @@ To stop, close the window or double-click `stop.bat`.
 ### macOS / Linux
 
 ```bash
-git clone https://github.com/efacsen/pak-lurah-discord-music-bot.git
-cd pak-lurah-discord-music-bot
+git clone https://github.com/efacsen/morty-discord-music-bot.git
+cd morty-discord-music-bot
 chmod +x setup.sh
 ./setup.sh
 ./start.sh
@@ -101,8 +101,8 @@ chmod +x setup.sh
 
 1. Clone and install:
    ```bash
-   git clone https://github.com/efacsen/pak-lurah-discord-music-bot.git
-   cd pak-lurah-discord-music-bot
+   git clone https://github.com/efacsen/morty-discord-music-bot.git
+   cd morty-discord-music-bot
    npm install
    ```
 

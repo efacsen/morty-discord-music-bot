@@ -5,11 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2026-02-07
+
+### Changed — Morty Rebrand
+- **Full Morty branding** — complete rebrand from "Pak Lurah" to "Morty Music Bot" with Rick & Morty personality
+- **ASCII art logo** — "MORTY" banner on all setup/start scripts (Windows batch, macOS/Linux shell, PowerShell)
+- **Portal green embeds** — all Discord embeds now use Morty's portal green (#97CE4C)
+- **Morty-flavored messages** — nervous stuttering personality throughout bot responses and event messages
+- **Bot presence** — "Listening to Oh geez, music!"
+- **Open-source credits** — "Made by efacsen with Claude" attribution throughout
+- **Updated README** — full rewrite with Morty branding, portfolio-ready presentation
+- **Renamed repository** — all references updated from `pak-lurah-discord-music-bot` to `morty-discord-music-bot`
+- **Package renamed** — npm package name changed to `morty-music-bot`
+
 ## [2.1.0] - 2026-02-07
 
 ### Added
-- **Morty branding** — full rebrand with ASCII art logo, portal green embeds, and Morty-flavored bot messages
-- **Open-source credits** — "Made by efacsen with Claude" attribution throughout
 - **YouTube playlist support** — use `/play` with any YouTube playlist URL to load all tracks
 - **Rich playlist embed** — shows playlist title, track count, total duration, and a 5-track preview
 - **Portable Windows package** — `setup.bat` downloads Node.js, FFmpeg, and yt-dlp into a local `runtime/` folder (no admin rights or system installs needed)

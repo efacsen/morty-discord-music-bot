@@ -1,5 +1,5 @@
 # ================================================
-# Pak Lurah Discord Music Bot - Windows Installer
+# Morty Music Bot - Windows Installer
 # Downloads portable Node.js, FFmpeg, and yt-dlp
 # No admin rights or system installs needed!
 # ================================================
@@ -62,7 +62,7 @@ Write-Host "   M M M O   O RRRR    T     Y" -ForegroundColor Cyan
 Write-Host "   M   M O   O R  R    T     Y" -ForegroundColor Cyan
 Write-Host "   M   M  OOO  R   R   T     Y" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "     Discord Music Bot v2.1.0" -ForegroundColor Cyan
+Write-Host "     Discord Music Bot v3.0.0" -ForegroundColor Cyan
 Write-Host '     "Oh geez, l-let me set this up for you!"' -ForegroundColor Yellow
 Write-Host ""
 Write-Host "  ==============================================" -ForegroundColor Cyan

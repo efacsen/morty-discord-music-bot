@@ -29,7 +29,7 @@ cat << 'EOF'
                          |___/
 EOF
 echo -e "${NC}"
-echo -e "  ${CYAN}Discord Music Bot v2.1.0${NC}"
+echo -e "  ${CYAN}Discord Music Bot v3.0.0${NC}"
 echo -e "  ${YELLOW}\"Oh geez, l-let me set this up for you!\"${NC}"
 echo ""
 
