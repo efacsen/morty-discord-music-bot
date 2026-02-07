@@ -1,4 +1,4 @@
-# 🎵 Pak Lurah Discord Music Bot
+# Pak Lurah Discord Music Bot
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
@@ -6,28 +6,27 @@
 
 A modern, feature-rich Discord music bot with YouTube support built on Discord.js v14 and discord-player v7.
 
-> **⚠️ DISCLAIMER:** This bot is built in my free time as a hobby project. Support is provided on a best-effort basis. While I'll do my best to fix issues and improve the bot, response times may vary. Contributions from the community are always welcome!
+> **DISCLAIMER:** This bot is built in my free time as a hobby project. Support is provided on a best-effort basis. While I'll do my best to fix issues and improve the bot, response times may vary. Contributions from the community are always welcome!
 
-## ✨ Features
+## Features
 
-- 🎵 **Play music from YouTube** (search or direct URLs)
-- 📋 **Queue management** with rich embeds
-- ⏯️ **Full playback controls** (play, pause, resume, skip, stop)
-- 🔊 **Audio controls** (volume, seek, loop modes)
-- 🎚️ **Audio filters** (bassboost)
-- 📊 **Beautiful displays** for now playing and queue
-- 🔄 **Loop modes**: Off, Track, Queue
-- ⏮️ **Previous track support**
-- 🔀 **Queue shuffling**
-- ⏭️ **Jump to specific tracks**
-- 🌐 **Cross-platform** (Windows, macOS, Linux)
-- 🤝 **Multi-host support** (share hosting with friends)
+- **Play music from YouTube** — search by name, video URL, or playlist URL
+- **YouTube playlist support** — paste a playlist URL to load all tracks at once
+- **Song selection** — top 3 search results with button-based selection
+- **Interactive Now Playing** — rich embed with pause, skip, stop, shuffle, loop, and queue buttons
+- **Queue management** — paginated queue view with per-track remove buttons and clear all
+- **Full playback controls** — play, pause, resume, skip, stop, seek, back
+- **Audio controls** — volume (0-100%), bass boost filter
+- **Loop modes** — off, track, queue
+- **Queue shuffling** and **jump to track**
+- **Cross-platform** — Windows, macOS, Linux (auto-detects yt-dlp on any OS)
+- **Portable Windows package** — no admin rights or system installs needed
 
-## 📋 Commands
+## Commands
 
 | Command | Description | Usage |
 |---------|-------------|-------|
-| `/play` | Play a song or playlist | `/play <song name or URL>` |
+| `/play` | Play a song or playlist from YouTube | `/play <name, video URL, or playlist URL>` |
 | `/pause` | Pause the current song | `/pause` |
 | `/resume` | Resume playback | `/resume` |
 | `/skip` | Skip to the next song | `/skip` |
@@ -42,11 +41,20 @@ A modern, feature-rich Discord music bot with YouTube support built on Discord.j
 | `/back` | Play previous track | `/back` |
 | `/bassboost` | Toggle bassboost filter | `/bassboost` |
 
-## 🚀 Quick Start
+## Quick Start
 
-### ⚡ One-Command Setup (Recommended for Non-Technical Users)
+### Windows (Portable — Recommended)
 
-**macOS/Linux:**
+No admin rights needed. Everything downloads into the project folder.
+
+1. Download and extract the [latest release](https://github.com/efacsen/pak-lurah-discord-music-bot/releases) (or clone the repo)
+2. Double-click **`setup.bat`** — downloads Node.js, FFmpeg, yt-dlp automatically and asks for your bot token
+3. Double-click **`start.bat`** — bot runs
+
+That's it. To stop, close the window or double-click `stop.bat`.
+
+### macOS / Linux
+
 ```bash
 git clone https://github.com/efacsen/pak-lurah-discord-music-bot.git
 cd pak-lurah-discord-music-bot
@@ -54,31 +62,19 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-**Windows:**
-```powershell
-git clone https://github.com/efacsen/pak-lurah-discord-music-bot.git
-cd pak-lurah-discord-music-bot
-setup.bat
-```
-
-The setup script will automatically:
-- ✅ Install all required dependencies (Node.js, FFmpeg, yt-dlp)
-- ✅ Configure your Discord bot credentials
-- ✅ Set up the bot for first run
-- ✅ Verify everything is working
-
-After setup completes, start the bot with:
+Then start with:
 ```bash
-# macOS/Linux
 ./start.sh
-
-# Windows
-start.bat
 ```
+
+The setup script will:
+- Install all required dependencies (Node.js, FFmpeg, yt-dlp)
+- Configure your Discord bot credentials
+- Set up the bot for first run
 
 ---
 
-### 🔧 Manual Installation (For Advanced Users)
+### Manual Installation
 
 <details>
 <summary>Click to expand manual setup instructions</summary>
@@ -90,7 +86,13 @@ start.bat
 - **yt-dlp** (required for YouTube playback)
 - **Discord Bot Token**
 
-#### Installation Steps
+#### Install system dependencies
+
+- **Windows:** `winget install OpenJS.NodeJS Gyan.FFmpeg yt-dlp`
+- **macOS:** `brew install node ffmpeg yt-dlp`
+- **Linux:** `sudo apt install nodejs ffmpeg && pip install yt-dlp`
+
+#### Setup
 
 1. **Clone the repository:**
    ```bash
@@ -103,23 +105,16 @@ start.bat
    npm install
    ```
 
-3. **Install system dependencies:**
-   - **Windows:** `choco install ffmpeg yt-dlp` (see [SETUP-WINDOWS.md](docs/SETUP-WINDOWS.md))
-   - **macOS:** `brew install ffmpeg yt-dlp` (see [SETUP-MAC.md](docs/SETUP-MAC.md))
-   - **Linux:** `sudo apt install ffmpeg && pip install yt-dlp`
-
-4. **Create a Discord bot:**
+3. **Create a Discord bot:**
    - Go to [Discord Developer Portal](https://discord.com/developers/applications)
    - Create a new application
    - Go to "Bot" tab and create a bot
    - Enable **Server Members Intent** and **Message Content Intent**
    - Copy the bot token
 
-5. **Configure the bot:**
+4. **Configure the bot:**
    ```bash
-   # Copy the example environment file
    cp .env.example .env
-
    # Edit .env and add your credentials
    ```
 
@@ -130,41 +125,62 @@ start.bat
    DISCORD_GUILD_ID=optional_for_testing
    ```
 
-6. **Invite the bot to your server:**
+5. **Invite the bot to your server:**
    ```
    https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=36700160&scope=bot%20applications.commands
    ```
    Replace `YOUR_CLIENT_ID` with your actual Client ID.
 
-7. **Check system requirements:**
-   ```bash
-   npm run check
-   ```
-
-8. **Start the bot:**
+6. **Start the bot:**
    ```bash
    npm start
    ```
 
 </details>
 
-## 📖 Detailed Setup Guides
+## Detailed Setup Guides
 
 - **Windows Users:** See [docs/SETUP-WINDOWS.md](docs/SETUP-WINDOWS.md)
 - **macOS Users:** See [docs/SETUP-MAC.md](docs/SETUP-MAC.md)
 - **Multi-Host Setup:** See [docs/HOSTING-GUIDE.md](docs/HOSTING-GUIDE.md)
 
-## 🎮 Usage
+## Usage
 
-1. **Start the bot** with `npm start`
+1. **Start the bot** with `npm start` (or double-click `start.bat` on Windows)
 2. **Join a voice channel** in your Discord server
 3. **Use slash commands**:
-   - `/play never gonna give you up`
-   - `/play https://www.youtube.com/watch?v=dQw4w9WgXcQ`
-   - `/volume 75`
-   - `/loop track`
+   ```
+   /play never gonna give you up
+   /play https://www.youtube.com/watch?v=dQw4w9WgXcQ
+   /play https://www.youtube.com/playlist?list=PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+   /volume 75
+   /loop track
+   ```
 
-## 🛠️ Development
+### Interactive Controls
+
+The **Now Playing** embed includes buttons for quick control without typing commands:
+
+| Button | Action |
+|--------|--------|
+| Pause / Resume | Toggle playback |
+| Skip | Skip to next track |
+| Stop | Stop and clear queue |
+| Shuffle | Shuffle upcoming tracks |
+| Loop | Cycle: Off → Track → Queue |
+| View Queue | Show queue with pagination and remove buttons |
+
+### Playlists
+
+Paste any YouTube playlist URL and all tracks are loaded:
+```
+/play https://www.youtube.com/playlist?list=PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+```
+The bot shows a rich embed with playlist name, track count, total duration, and a preview of the first 5 tracks.
+
+URLs with both a video and playlist (e.g. `watch?v=xxx&list=PLxxx`) load the full playlist.
+
+## Development
 
 **Run in development mode** (auto-reload on changes):
 ```bash
@@ -176,46 +192,55 @@ npm run dev
 npm run check
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-discord-music-bot/
+pak-lurah-discord-music-bot/
 ├── src/
-│   ├── commands/          # All slash commands
-│   │   ├── play.js       # Play music from YouTube
-│   │   ├── pause.js      # Pause playback
-│   │   ├── resume.js     # Resume playback
-│   │   ├── skip.js       # Skip track
-│   │   ├── stop.js       # Stop and clear queue
-│   │   ├── queue.js      # Display queue
-│   │   ├── nowplaying.js # Current track info
-│   │   ├── volume.js     # Volume control
-│   │   ├── loop.js       # Loop modes
-│   │   ├── shuffle.js    # Shuffle queue
-│   │   ├── seek.js       # Seek to timestamp
-│   │   ├── jump.js       # Jump to track
-│   │   ├── back.js       # Previous track
-│   │   └── bassboost.js  # Audio filter
+│   ├── index.js                  # Main entry point, player events
+│   ├── commands/                 # 14 slash commands
+│   │   ├── play.js              # Play music (search, URL, playlist)
+│   │   ├── pause.js             # Pause playback
+│   │   ├── resume.js            # Resume playback
+│   │   ├── skip.js              # Skip track
+│   │   ├── stop.js              # Stop and clear queue
+│   │   ├── queue.js             # Display queue
+│   │   ├── nowplaying.js        # Current track info
+│   │   ├── volume.js            # Volume control
+│   │   ├── loop.js              # Loop modes
+│   │   ├── shuffle.js           # Shuffle queue
+│   │   ├── seek.js              # Seek to timestamp
+│   │   ├── jump.js              # Jump to track
+│   │   ├── back.js              # Previous track
+│   │   └── bassboost.js         # Audio filter
 │   ├── events/
-│   │   ├── ready.js              # Bot ready event
-│   │   └── interactionCreate.js # Command handler
-│   ├── utils/
-│   │   └── formatTime.js         # Time utilities
-│   └── index.js                  # Main entry point
+│   │   ├── ready.js             # Bot ready + command registration
+│   │   └── interactionCreate.js # Routes commands and button clicks
+│   ├── handlers/
+│   │   └── buttonHandler.js     # Interactive button controls
+│   ├── extractors/
+│   │   ├── YtDlpExtractor.js   # Primary YouTube extractor (yt-dlp)
+│   │   └── PlayDLExtractor.js  # Fallback extractor (play-dl)
+│   └── utils/
+│       ├── formatTime.js        # Time formatting and progress bar
+│       ├── createPlayerEmbed.js # Now Playing, Queue, and Playlist embeds
+│       └── createSongSelectionEmbed.js # Search result selection UI
+├── scripts/
+│   └── install.ps1              # Windows portable installer
 ├── docs/
-│   ├── SETUP-WINDOWS.md   # Windows setup guide
-│   ├── SETUP-MAC.md       # macOS setup guide
-│   └── HOSTING-GUIDE.md   # Multi-host guide
-├── .env.example           # Environment template
-├── .gitignore
-├── check-system.js        # System checker
-├── package.json
-├── Dockerfile
-├── docker-compose.yml
-└── README.md
+│   ├── SETUP-WINDOWS.md
+│   ├── SETUP-MAC.md
+│   └── HOSTING-GUIDE.md
+├── setup.bat / setup.sh         # One-click setup
+├── start.bat / start.sh         # Start bot
+├── stop.bat / stop.sh           # Stop bot
+├── .env.example                 # Environment template
+├── Dockerfile                   # Docker image
+├── docker-compose.yml           # Docker compose
+└── package.json
 ```
 
-## 🐳 Docker Support
+## Docker Support
 
 **Build and run with Docker:**
 ```bash
@@ -232,41 +257,44 @@ docker-compose logs -f bot
 docker-compose down
 ```
 
-## 🔒 Security & Best Practices
+## Security & Best Practices
 
-### ✅ DO:
+### DO:
 - Keep `.env` file private and secure
 - Use environment variables for tokens
 - Regularly update dependencies
 - Use specific bot permissions (not Administrator)
 - Keep FFmpeg and Node.js updated
 
-### ❌ DON'T:
+### DON'T:
 - Commit `.env` to Git (it's in `.gitignore`)
 - Share your bot token publicly
 - Give bot admin permissions
 - Run multiple instances with same token simultaneously
 
-## 🤝 Multi-Host Shared Hosting
+## Multi-Host Shared Hosting
 
 This bot supports shared hosting where multiple people can take turns running it!
 
 **Key points:**
-- ✅ Multiple people can have the code
-- ✅ Share the bot token securely
-- ❌ Only ONE person can run it at a time
+- Multiple people can have the code
+- Share the bot token securely
+- Only ONE person can run it at a time
 
-See [docs/HOSTING-GUIDE.md](docs/HOSTING-GUIDE.md) for detailed instructions on:
-- Coordinating between hosts
-- Secure token sharing
-- Handoff procedures
-- Troubleshooting multi-host issues
+See [docs/HOSTING-GUIDE.md](docs/HOSTING-GUIDE.md) for detailed instructions.
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 **Having issues?** Check the comprehensive [TROUBLESHOOTING.md](TROUBLESHOOTING.md) guide for detailed solutions.
 
-**YouTube not playing?** See [YouTube Playback Fix (October 2025)](TROUBLESHOOTING.md#youtube-playback-issue-october-2025)
+### yt-dlp not found
+
+The bot auto-detects yt-dlp across all platforms. If it's not found, install it:
+- **Windows:** `winget install yt-dlp`
+- **macOS:** `brew install yt-dlp`
+- **Linux:** `sudo apt install yt-dlp` or `pip install yt-dlp`
+
+You can also set the `YTDLP_PATH` environment variable to point to the binary.
 
 ### Bot doesn't start
 
@@ -285,17 +313,14 @@ See [docs/HOSTING-GUIDE.md](docs/HOSTING-GUIDE.md) for detailed instructions on:
    DISCORD_GUILD_ID=your_server_id_here
    ```
 2. Restart the bot
-3. Commands appear instantly in that server!
+3. Commands appear instantly in that server
 
 ### "FFmpeg not found" error
 
-FFmpeg is required for audio processing!
-
-- **Windows:** `choco install ffmpeg` or download from [ffmpeg.org](https://ffmpeg.org/download.html)
+- **Windows (portable):** Run `setup.bat` — it downloads FFmpeg automatically
+- **Windows (manual):** `winget install Gyan.FFmpeg`
 - **macOS:** `brew install ffmpeg`
 - **Linux:** `sudo apt install ffmpeg`
-
-After installing, restart your terminal and verify: `ffmpeg -version`
 
 ### No audio playing
 
@@ -313,46 +338,7 @@ rm -rf node_modules package-lock.json
 npm install
 ```
 
-### Bot shows online but commands don't work
-
-1. Check bot has "Use Application Commands" permission
-2. Re-invite bot with correct permissions
-3. Wait for commands to register (or use guild commands)
-4. Check console for errors
-
-## 💡 Tips & Tricks
-
-- Use `DISCORD_GUILD_ID` during development for instant command updates
-- Check `npm run check` before reporting issues
-- Keep dependencies updated: `npm update`
-- Use PM2 for production deployments
-- Monitor console logs for useful debugging information
-
-## 🌟 Features in Detail
-
-### Queue Management
-- View up to 10 upcoming tracks
-- Total queue duration calculation
-- Track position and metadata
-- Rich embed display
-
-### Loop Modes
-- **Off:** Play through queue once
-- **Track:** Repeat current track
-- **Queue:** Repeat entire queue
-
-### Audio Controls
-- Volume: 0-100%
-- Seek: Jump to specific timestamp (MM:SS format)
-- Bassboost: Enhanced bass filter
-
-### Smart Features
-- Auto-disconnect on empty channel (5 min)
-- Auto-disconnect when queue ends (5 min)
-- Error recovery and graceful handling
-- Cross-platform compatibility
-
-## 📊 System Requirements
+## System Requirements
 
 | Requirement | Minimum | Recommended |
 |-------------|---------|-------------|
@@ -362,36 +348,24 @@ npm install
 | Internet | Stable connection | Broadband |
 | FFmpeg | Any version | Latest |
 
-## 🔄 Updates & Maintenance
-
-**Update dependencies:**
-```bash
-npm update
-```
-
-**Check for outdated packages:**
-```bash
-npm outdated
-```
-
-**Update Node.js:**
-- Windows: Download from [nodejs.org](https://nodejs.org/)
-- macOS: `brew upgrade node`
-- Linux: Use your package manager
-
-## 🎯 Roadmap
+## Roadmap
 
 Potential future features:
+- [x] YouTube playlist support
+- [x] Interactive queue management (remove tracks, pagination)
+- [x] Song selection UI (top 3 results)
+- [x] Cross-platform yt-dlp auto-detection
+- [x] Portable Windows package
 - [ ] Spotify support
 - [ ] SoundCloud support
-- [ ] Playlist management
 - [ ] User favorites/playlists
 - [ ] Web dashboard
 - [ ] Queue history
 - [ ] Lyrics display
 - [ ] More audio filters
+- [ ] Permission/DJ role system
 
-## 🤔 FAQ
+## FAQ
 
 **Q: Why Node.js v18+?**
 A: Required for ES modules and modern discord.js features.
@@ -408,18 +382,21 @@ A: Only one at a time with the same token. See [HOSTING-GUIDE.md](docs/HOSTING-G
 **Q: Does this work on Raspberry Pi?**
 A: Yes, but performance may vary. Use Raspberry Pi 4 with 2GB+ RAM.
 
+**Q: Does the Windows portable setup need admin rights?**
+A: No. Everything is downloaded into the project's `runtime/` folder. No system-wide installs.
+
 **Q: Is this bot free?**
 A: Yes, 100% free and open-source.
 
-## 📝 License
+## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
-## 👤 Author
+## Author
 
 **efacsen**
 
-## ⚠️ Important Disclaimers
+## Important Disclaimers
 
 ### Free-Time Hobby Project
 This Discord music bot is developed and maintained in my free time as a hobby project. Please understand:
@@ -441,23 +418,15 @@ I appreciate and welcome contributions from the community! If you find bugs or h
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [discord.js](https://discord.js.org/) - Discord API library
 - [discord-player](https://discord-player.js.org/) - Music player library
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp) - YouTube downloader (industry standard)
 - [yt-dlp-wrap](https://github.com/foxesdocode/yt-dlp-wrap) - Node.js wrapper for yt-dlp
+- [play-dl](https://github.com/play-dl/play-dl) - Fallback YouTube extractor
 - FFmpeg - Audio processing
-
-## 📞 Support
-
-- Check [docs/](docs/) for detailed guides
-- Run `npm run check` to diagnose issues
-- Check console logs for error messages
-- Ensure all prerequisites are installed
 
 ---
 
-**Made with ❤️ for the Discord community**
-
-🎵 Enjoy your music bot!
+**Made with love for the Discord community**
