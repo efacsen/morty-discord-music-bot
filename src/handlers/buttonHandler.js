@@ -15,10 +15,20 @@ export async function handlePlayerButton(interaction) {
         });
     }
 
-    // Defer reply for processing
-    await interaction.deferReply({ ephemeral: true });
-
     try {
+        // Queue management buttons (page/remove/clear) need deferUpdate to edit
+        // the existing queue message. Player control buttons need deferReply for
+        // a new ephemeral response.
+        const isQueueButton = interaction.customId.startsWith('queue_page_')
+            || interaction.customId.startsWith('queue_remove_')
+            || interaction.customId === 'queue_clear_all';
+
+        if (isQueueButton) {
+            await interaction.deferUpdate();
+        } else {
+            await interaction.deferReply({ ephemeral: true });
+        }
+
         switch (interaction.customId) {
             case 'player_pause':
                 if (queue.node.isPaused()) {
@@ -91,26 +101,24 @@ export async function handlePlayerButton(interaction) {
                 // Handle queue pagination and removal buttons
                 if (interaction.customId.startsWith('queue_page_')) {
                     const page = parseInt(interaction.customId.split('_')[2]);
-                    const queueEmbed = createQueueEmbed(queue, page);
-                    await interaction.update(queueEmbed);
+                    const pageEmbed = createQueueEmbed(queue, page);
+                    await interaction.editReply(pageEmbed);
                 } else if (interaction.customId.startsWith('queue_remove_')) {
                     const position = parseInt(interaction.customId.split('_')[2]);
                     const track = queue.tracks.data[position];
 
                     if (!track) {
-                        await interaction.update({ content: '❌ Track not found in queue', components: [] });
+                        await interaction.editReply({ content: '❌ Track not found in queue', embeds: [], components: [] });
                         return;
                     }
 
                     queue.node.remove(position);
-                    await interaction.update({
-                        content: `✅ Removed: **${track.title}**`,
-                        embeds: [],
-                        components: []
-                    });
+                    // Show updated queue instead of just a confirmation message
+                    const updatedEmbed = createQueueEmbed(queue, 0);
+                    await interaction.editReply(updatedEmbed);
                 } else if (interaction.customId === 'queue_clear_all') {
                     queue.tracks.clear();
-                    await interaction.update({
+                    await interaction.editReply({
                         content: '🗑️ Queue cleared!',
                         embeds: [],
                         components: []
@@ -121,7 +129,8 @@ export async function handlePlayerButton(interaction) {
         }
     } catch (error) {
         console.error('[ButtonHandler] Error handling button:', error);
-        await interaction.editReply('❌ An error occurred while processing your request').catch(console.error);
+        const errorMsg = '❌ An error occurred while processing your request';
+        await interaction.editReply({ content: errorMsg, embeds: [], components: [] }).catch(console.error);
     }
 }
 
