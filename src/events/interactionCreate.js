@@ -5,7 +5,7 @@ export default {
     async execute(interaction) {
         // Handle button interactions
         if (interaction.isButton()) {
-            if (interaction.customId.startsWith('player_')) {
+            if (interaction.customId.startsWith('player_') || interaction.customId.startsWith('queue_')) {
                 await handlePlayerButton(interaction);
                 return;
             }
