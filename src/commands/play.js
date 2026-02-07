@@ -1,15 +1,16 @@
 import { SlashCommandBuilder } from 'discord.js';
 import { useMainPlayer } from 'discord-player';
 import { createSongSelectionEmbed } from '../utils/createSongSelectionEmbed.js';
+import { createPlaylistEmbed } from '../utils/createPlayerEmbed.js';
 
 export default {
     data: new SlashCommandBuilder()
         .setName('play')
-        .setDescription('Play a song from YouTube')
+        .setDescription('Play a song or playlist from YouTube')
         .addStringOption(option =>
             option
                 .setName('query')
-                .setDescription('Song name or YouTube URL')
+                .setDescription('Song name, YouTube URL, or YouTube playlist URL')
                 .setRequired(true)
         ),
 
@@ -87,9 +88,14 @@ export default {
             // Add track(s) to queue
             if (searchResult.playlist) {
                 queue.addTrack(searchResult.tracks);
-                await interaction.editReply(
-                    `✅ Added **${searchResult.tracks.length}** tracks from playlist: **${searchResult.playlist.title}**`
+
+                // Show rich playlist embed
+                const playlistMessage = createPlaylistEmbed(
+                    searchResult.playlist,
+                    searchResult.tracks,
+                    interaction.user
                 );
+                await interaction.editReply(playlistMessage);
 
                 // Start playing if not already playing
                 if (!queue.node.isPlaying()) {
