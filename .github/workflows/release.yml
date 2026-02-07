@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Create release archive
+        run: |
+          # Create a clean archive excluding dev files
+          mkdir -p dist
+          git archive --format=zip HEAD \
+            --prefix=pak-lurah-discord-music-bot/ \
+            -o dist/pak-lurah-discord-music-bot-${{ steps.version.outputs.VERSION }}.zip
+
+      - name: Extract changelog for this version
+        id: changelog
+        run: |
+          # Extract the changelog section for the current version
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          VERSION_NUM="${VERSION#v}"
+          # Get content between this version header and the next version header
+          NOTES=$(awk "/^## \[${VERSION_NUM}\]/{found=1; next} /^## \[/{if(found) exit} found{print}" CHANGELOG.md)
+          # Write to file for the release body
+          echo "$NOTES" > release_notes.md
+          # Append download instructions
+          echo "" >> release_notes.md
+          echo "---" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "### Quick Start (Windows)" >> release_notes.md
+          echo "1. Download the ZIP below" >> release_notes.md
+          echo "2. Extract to any folder" >> release_notes.md
+          echo "3. Double-click \`setup.bat\`" >> release_notes.md
+          echo "4. Double-click \`start.bat\`" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "### Quick Start (macOS/Linux)" >> release_notes.md
+          echo '```bash' >> release_notes.md
+          echo "chmod +x setup.sh && ./setup.sh" >> release_notes.md
+          echo "./start.sh" >> release_notes.md
+          echo '```' >> release_notes.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ steps.version.outputs.VERSION }}
+          body_path: release_notes.md
+          files: dist/*.zip
+          draft: false
+          prerelease: false

@@ -1,6 +1,6 @@
 {
   "name": "pak-lurah-discord-music-bot",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Modern Discord music bot with YouTube support - Built with ❤️ in free time",
   "main": "src/index.js",
   "type": "module",
