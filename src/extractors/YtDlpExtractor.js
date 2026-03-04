@@ -243,21 +243,19 @@ export class YtDlpExtractor extends BaseExtractor {
                 throw new Error('No URL found in track object');
             }
 
-            // Use yt-dlp with fallback format selector to handle SABR streaming
-            // Format: bestaudio > best audio from any format > best available
-            const streamUrl = await this.ytDlp.execPromise([
+            // Pipe audio directly through yt-dlp (-o -) instead of returning a pre-signed URL.
+            // Pre-signed URLs expire quickly and require YouTube auth headers that FFmpeg doesn't
+            // send on its own, causing "operation aborted" errors. Piping directly avoids this.
+            const stream = this.ytDlp.execStream([
                 url,
                 '-f', 'bestaudio/ba/b',
-                '-g', // Get direct URL
+                '-o', '-',
                 '--no-playlist',
                 '--extractor-args', 'youtube:player_client=android,web'
             ]);
 
-            const directUrl = streamUrl.trim().split('\n')[0];
-            console.log(`[YtDlp] Stream URL obtained`);
-
-            // Return the direct URL as a string - discord-player will handle creating the stream
-            return directUrl;
+            console.log(`[YtDlp] Streaming directly via yt-dlp pipe`);
+            return stream;
         } catch (error) {
             console.error('[YtDlp] Error getting stream:', error);
             throw error;
