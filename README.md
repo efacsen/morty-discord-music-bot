@@ -232,7 +232,8 @@ See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for detailed solutions.
 Quick fixes:
 - **yt-dlp not found:** The bot auto-detects it. Install via `winget install yt-dlp` / `brew install yt-dlp` / `pip install yt-dlp`, or set `YTDLP_PATH` env var.
 - **No slash commands:** Add `DISCORD_GUILD_ID` to `.env` for instant registration, or wait up to 1 hour for global commands.
-- **No audio:** Check FFmpeg is installed and bot has Connect + Speak permissions.
+- **No audio:** Check FFmpeg is installed and bot has Connect + Speak permissions. Make sure yt-dlp is up to date (`brew upgrade yt-dlp` / `pip install -U yt-dlp`) — YouTube frequently changes their API.
+- **Voice connection fails:** Discord now requires DAVE (Discord Audio Video Encryption). Make sure `@snazzah/davey` is installed (`npm install`).
 - **Module errors:** Delete `node_modules` and run `npm install` again.
 
 ## Contributing
@@ -250,10 +251,10 @@ MIT License - see [LICENSE](LICENSE) for details.
 **Made by [efacsen](https://github.com/efacsen) with [Claude](https://claude.ai)**
 
 Built with:
-- [discord.js](https://discord.js.org/) — Discord API library
-- [discord-player](https://discord-player.js.org/) — Music player framework
+- [discord.js](https://discord.js.org/) v14 — Discord API library
+- [discord-player](https://discord-player.js.org/) v7.2 — Music player framework
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp) — YouTube extraction
-- [play-dl](https://github.com/play-dl/play-dl) — Fallback extractor
+- [@snazzah/davey](https://github.com/snazzah/davey) — Discord DAVE voice encryption
 - FFmpeg — Audio processing
 
 ---

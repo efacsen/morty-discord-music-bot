@@ -1,5 +1,6 @@
 import { BaseExtractor, QueryType, Track } from 'discord-player';
 import { execSync } from 'child_process';
+import { PassThrough } from 'stream';
 import pkg from 'yt-dlp-wrap';
 const { default: YTDlpWrap } = pkg;
 
@@ -129,7 +130,9 @@ export class YtDlpExtractor extends BaseExtractor {
             const ytdlpArgs = [
                 searchQuery,
                 '--dump-json',
-                '--no-playlist'
+                '--no-playlist',
+                '--extractor-args', 'youtube:player_client=android_music,ios,mweb,web',
+                '--no-warnings'
             ];
 
             const jsonOutput = await this.ytDlp.execPromise(ytdlpArgs);
@@ -178,7 +181,9 @@ export class YtDlpExtractor extends BaseExtractor {
                 query,
                 '--dump-json',
                 '--flat-playlist',
-                '--yes-playlist'
+                '--yes-playlist',
+                '--extractor-args', 'youtube:player_client=android_music,ios,mweb,web',
+                '--no-warnings'
             ];
 
             const jsonOutput = await this.ytDlp.execPromise(ytdlpArgs);
@@ -243,19 +248,53 @@ export class YtDlpExtractor extends BaseExtractor {
                 throw new Error('No URL found in track object');
             }
 
-            // Pipe audio directly through yt-dlp (-o -) instead of returning a pre-signed URL.
-            // Pre-signed URLs expire quickly and require YouTube auth headers that FFmpeg doesn't
-            // send on its own, causing "operation aborted" errors. Piping directly avoids this.
-            const stream = this.ytDlp.execStream([
+            // Pipe audio through yt-dlp process. Direct URLs don't work because
+            // YouTube requires auth headers that FFmpeg doesn't send.
+            // Use PassThrough to buffer the data so the stream stays open
+            // while the audio player consumes it at playback speed.
+            console.log(`[YtDlp] Starting yt-dlp audio pipe...`);
+
+            const passThrough = new PassThrough({
+                highWaterMark: 1 << 25 // 32MB buffer
+            });
+
+            const ytdlpStream = this.ytDlp.execStream([
                 url,
-                '-f', 'bestaudio/ba/b',
+                '-f', 'bestaudio*[ext=webm]/bestaudio*/best',
                 '-o', '-',
                 '--no-playlist',
-                '--extractor-args', 'youtube:player_client=android,web'
+                '--extractor-args', 'youtube:player_client=android_music,ios,mweb,web',
+                '--no-warnings'
             ]);
 
-            console.log(`[YtDlp] Streaming directly via yt-dlp pipe`);
-            return stream;
+            let chunkCount = 0;
+            let totalBytes = 0;
+
+            ytdlpStream.on('data', (chunk) => {
+                chunkCount++;
+                totalBytes += chunk.length;
+                if (chunkCount <= 3 || chunkCount % 200 === 0) {
+                    console.log(`[YtDlp Stream] Chunk #${chunkCount}: ${chunk.length} bytes (total: ${totalBytes})`);
+                }
+            });
+
+            ytdlpStream.on('end', () => {
+                console.log(`[YtDlp Stream] Download complete (${chunkCount} chunks, ${totalBytes} bytes)`);
+            });
+
+            ytdlpStream.on('error', (error) => {
+                console.error(`[YtDlp Stream] Error:`, error.message);
+                passThrough.destroy(error);
+            });
+
+            passThrough.on('close', () => {
+                console.log(`[YtDlp Stream] PassThrough closed`);
+            });
+
+            ytdlpStream.pipe(passThrough);
+
+            console.log(`[YtDlp] Returning buffered stream`);
+            return passThrough;
         } catch (error) {
             console.error('[YtDlp] Error getting stream:', error);
             throw error;

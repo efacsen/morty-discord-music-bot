@@ -83,6 +83,7 @@ export default {
             // Connect to voice channel if not connected
             if (!queue.connection) {
                 await queue.connect(interaction.member.voice.channel);
+                console.log('[Play Command] Connected to voice channel');
             }
 
             // Add track(s) to queue

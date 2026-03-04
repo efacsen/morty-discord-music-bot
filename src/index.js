@@ -33,7 +33,7 @@ const nowPlayingMessages = new Map();
 
 // Initialize discord-player
 const player = new Player(client, {
-    skipFFmpeg: false, // Always use FFmpeg for better compatibility
+    skipFFmpeg: false,
     ytdlOptions: {
         quality: 'highestaudio',
         highWaterMark: 1 << 25
@@ -55,14 +55,37 @@ player.events.on('debug', (queue, message) => {
     console.log(`[Queue Debug] ${message}`);
 });
 
-// Error handlers
+// Error handlers with detailed debugging
 player.events.on('playerError', (queue, error) => {
     console.error(`[Player Error] ${error.message}`);
+    console.error(`[Player Error] Full error:`, error);
+    console.error(`[Player Error] Stack trace:`, error.stack);
+
+    // Log player state at time of error
+    console.error(`[Player Error] Player state:`, {
+        isPlaying: queue.node.isPlaying(),
+        isPaused: queue.node.isPaused(),
+        currentTrack: queue.currentTrack?.title,
+        tracksCount: queue.tracks.size,
+        volume: queue.node.volume
+    });
+
     queue.metadata.channel.send(`Aw geez, something broke: ${error.message}`);
 });
 
 player.events.on('error', (queue, error) => {
     console.error(`[Queue Error] ${error.message}`);
+    console.error(`[Queue Error] Full error:`, error);
+    console.error(`[Queue Error] Stack trace:`, error.stack);
+
+    // Log queue state at time of error
+    console.error(`[Queue Error] Queue state:`, {
+        isPlaying: queue.node.isPlaying(),
+        connection: queue.connection ? 'connected' : 'disconnected',
+        currentTrack: queue.currentTrack?.title,
+        tracksCount: queue.tracks.size
+    });
+
     queue.metadata.channel.send(`Oh no, oh geez! Queue error: ${error.message}`);
 });
 
@@ -139,7 +162,41 @@ player.events.on('emptyQueue', (queue) => {
 
 player.events.on('error', (queue, error) => {
     console.error(`❌ Player error: ${error.message}`);
+    console.error(`❌ Full error object:`, error);
+    console.error(`❌ Error stack:`, error.stack);
     queue.metadata.channel.send(`❌ An error occurred: ${error.message}`);
+});
+
+// Monitor voice connection state changes
+player.events.on('connection', (queue) => {
+    const connection = queue.connection;
+    console.log(`[Voice Connection] State:`, connection?.state?.status || 'unknown');
+
+    if (connection) {
+        // Log connection state changes
+        connection.on('stateChange', (oldState, newState) => {
+            console.log(`[Voice Connection] State changed: ${oldState.status} -> ${newState.status}`);
+        });
+
+        // Log connection errors
+        connection.on('error', (error) => {
+            console.error(`[Voice Connection] Error:`, error);
+            console.error(`[Voice Connection] Error stack:`, error.stack);
+        });
+    }
+});
+
+// Monitor audio player lifecycle
+// IMPORTANT: willPlayTrack passes a resolver callback as 4th arg that MUST be called
+// to unblock the play pipeline. Without calling it, playback hangs forever.
+player.events.on('willPlayTrack', (queue, track, config, resolver) => {
+    console.log(`[Audio Player] Will play track: ${track.title}`);
+    console.log(`[Audio Player] Player state before playing:`, {
+        isPlaying: queue.node.isPlaying(),
+        isPaused: queue.node.isPaused(),
+        volume: queue.node.volume
+    });
+    resolver();
 });
 
 // Load command files dynamically
