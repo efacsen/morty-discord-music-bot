@@ -55,10 +55,31 @@ export class YtDlpExtractor extends BaseExtractor {
         try {
             const version = await this.ytDlp.getVersion();
             console.log('[YtDlp] Using yt-dlp version:', version);
+            const cookieArgs = this.getCookieArgs();
+            if (cookieArgs.length > 0) {
+                console.log(`[YtDlp] Cookie source: ${cookieArgs.join(' ')}`);
+            } else {
+                console.warn('[YtDlp] No cookies configured — YouTube may block requests. Set YTDLP_COOKIES_FILE or YTDLP_COOKIES_BROWSER env var.');
+            }
         } catch (error) {
             console.error('[YtDlp] Failed to initialize yt-dlp:', error);
             throw error;
         }
+    }
+
+    /**
+     * Returns yt-dlp args for cookie authentication.
+     * Set YTDLP_COOKIES_FILE=/path/to/cookies.txt  (exported from browser extension)
+     * Or YTDLP_COOKIES_BROWSER=chrome|safari|firefox  (reads live browser session)
+     */
+    getCookieArgs() {
+        if (process.env.YTDLP_COOKIES_FILE) {
+            return ['--cookies', process.env.YTDLP_COOKIES_FILE];
+        }
+        if (process.env.YTDLP_COOKIES_BROWSER) {
+            return ['--cookies-from-browser', process.env.YTDLP_COOKIES_BROWSER];
+        }
+        return [];
     }
 
     async validate(query, type) {
@@ -132,7 +153,8 @@ export class YtDlpExtractor extends BaseExtractor {
                 '--dump-json',
                 '--no-playlist',
                 '--extractor-args', 'youtube:player_client=android_music,ios,mweb,web',
-                '--no-warnings'
+                '--no-warnings',
+                ...this.getCookieArgs()
             ];
 
             const jsonOutput = await this.ytDlp.execPromise(ytdlpArgs);
@@ -183,7 +205,8 @@ export class YtDlpExtractor extends BaseExtractor {
                 '--flat-playlist',
                 '--yes-playlist',
                 '--extractor-args', 'youtube:player_client=android_music,ios,mweb,web',
-                '--no-warnings'
+                '--no-warnings',
+                ...this.getCookieArgs()
             ];
 
             const jsonOutput = await this.ytDlp.execPromise(ytdlpArgs);
@@ -264,7 +287,8 @@ export class YtDlpExtractor extends BaseExtractor {
                 '-o', '-',
                 '--no-playlist',
                 '--extractor-args', 'youtube:player_client=android_music,ios,mweb,web',
-                '--no-warnings'
+                '--no-warnings',
+                ...this.getCookieArgs()
             ]);
 
             let chunkCount = 0;

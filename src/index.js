@@ -231,5 +231,18 @@ for (const file of eventFiles) {
     console.log(`✅ Loaded event: ${event.default.name}`);
 }
 
+// Prevent unhandled rejections and errors from crashing the process
+process.on('unhandledRejection', (error) => {
+    console.error('[Process] Unhandled rejection:', error);
+});
+
+process.on('uncaughtException', (error) => {
+    console.error('[Process] Uncaught exception:', error);
+});
+
+client.on('error', (error) => {
+    console.error('[Discord Client] Error:', error);
+});
+
 // Login to Discord
 client.login(process.env.DISCORD_CLIENT_TOKEN);

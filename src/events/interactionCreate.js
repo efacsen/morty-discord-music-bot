@@ -29,16 +29,20 @@ export default {
         } catch (error) {
             console.error(`❌ Error executing ${interaction.commandName}:`, error);
 
-            const errorMessage = {
-                content: '❌ There was an error executing this command!',
-                ephemeral: true
-            };
+            try {
+                const errorMessage = {
+                    content: '❌ There was an error executing this command!',
+                    flags: 64 // ephemeral
+                };
 
-            // Handle different interaction states
-            if (interaction.replied || interaction.deferred) {
-                await interaction.followUp(errorMessage);
-            } else {
-                await interaction.reply(errorMessage);
+                if (interaction.replied || interaction.deferred) {
+                    await interaction.followUp(errorMessage);
+                } else {
+                    await interaction.reply(errorMessage);
+                }
+            } catch (replyError) {
+                // Interaction expired or already acknowledged — just log it
+                console.error(`[Command] Could not send error reply:`, replyError.message);
             }
         }
     }
