@@ -12,7 +12,7 @@ Morty is a working Discord music bot being refactored for open-source release. T
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: TypeScript Foundation** - Establish compiler config, shared types, and build pipeline that all subsequent phases depend on
+- [x] **Phase 1: TypeScript Foundation** - Establish compiler config, shared types, and build pipeline that all subsequent phases depend on
 - [ ] **Phase 2: Source Migration** - Convert all JavaScript source files to TypeScript in dependency order
 - [ ] **Phase 3: Setup Wizard** - Update cross-platform setup wizard to handle the TypeScript build step
 - [ ] **Phase 4: Command Audit** - Verify all 14 commands work in a live server post-migration
@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 2 plans
 Plans:
 - [x] 01-01-PLAN.md — Install TS toolchain, create tsconfig + shared types, update package.json scripts and version pins
-- [ ] 01-02-PLAN.md — Configure ESLint 9 + Prettier, add @snazzah/davey startup guard
+- [x] 01-02-PLAN.md — Configure ESLint 9 + Prettier, add @snazzah/davey startup guard
 
 ### Phase 2: Source Migration
 **Goal**: The entire `src/` codebase is TypeScript with no JavaScript files remaining and all type boundaries are explicit
@@ -99,7 +99,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. TypeScript Foundation | 1/2 | In Progress | - |
+| 1. TypeScript Foundation | 2/2 | Complete | 2026-03-29 |
 | 2. Source Migration | 0/TBD | Not started | - |
 | 3. Setup Wizard | 0/TBD | Not started | - |
 | 4. Command Audit | 0/TBD | Not started | - |
