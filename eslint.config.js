@@ -8,7 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default tseslint.config(
   {
-    ignores: ['src/**/*.js', 'dist/**/*', 'node_modules/**/*'],
+    ignores: ['src/**/*.js', 'src/index.ts', 'dist/**/*', 'node_modules/**/*'],
   },
   {
     files: ['src/**/*.ts'],
