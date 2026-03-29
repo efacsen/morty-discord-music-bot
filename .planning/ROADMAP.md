@@ -31,10 +31,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Shared interfaces (`CommandModule`, `EventModule`, `QueueMetadata`) exist in `src/types/` and are importable from any source file
   4. ESLint runs cleanly on the project with no rule violations
   5. Starting the bot without `@snazzah/davey` installed throws a descriptive error immediately rather than silently failing
-**Plans:** 2 plans
+**Plans:** 3 plans
 Plans:
 - [x] 01-01-PLAN.md — Install TS toolchain, create tsconfig + shared types, update package.json scripts and version pins
 - [x] 01-02-PLAN.md — Configure ESLint 9 + Prettier, add @snazzah/davey startup guard
+- [x] 01-03-PLAN.md — Close TSF-03 by installing tsx explicitly and adding a Phase 1-safe src/index.ts watch shim
 
 ### Phase 2: Source Migration
 **Goal**: The entire `src/` codebase is TypeScript with no JavaScript files remaining and all type boundaries are explicit
@@ -99,7 +100,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. TypeScript Foundation | 2/2 | Complete | 2026-03-29 |
+| 1. TypeScript Foundation | 3/3 | Complete | 2026-03-29 |
 | 2. Source Migration | 0/TBD | Not started | - |
 | 3. Setup Wizard | 0/TBD | Not started | - |
 | 4. Command Audit | 0/TBD | Not started | - |
