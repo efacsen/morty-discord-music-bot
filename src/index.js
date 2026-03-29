@@ -11,6 +11,26 @@ import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
+// Check for @snazzah/davey (required for Discord DAVE voice encryption)
+async function checkDavey() {
+    try {
+        await import('@snazzah/davey');
+    } catch (err) {
+        if (err?.code === 'ERR_MODULE_NOT_FOUND') {
+            console.error(
+                '[Startup Error] @snazzah/davey is required for Discord voice encryption (DAVE protocol).\n' +
+                'Install it with: npm install @snazzah/davey\n' +
+                'Without it, voice connections will silently fail at the Identifying state.'
+            );
+            process.exit(1);
+        }
+
+        throw err;
+    }
+}
+
+await checkDavey();
+
 // Get directory name for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
