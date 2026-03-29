@@ -33,7 +33,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. Starting the bot without `@snazzah/davey` installed throws a descriptive error immediately rather than silently failing
 **Plans:** 2 plans
 Plans:
-- [ ] 01-01-PLAN.md — Install TS toolchain, create tsconfig + shared types, update package.json scripts and version pins
+- [x] 01-01-PLAN.md — Install TS toolchain, create tsconfig + shared types, update package.json scripts and version pins
 - [ ] 01-02-PLAN.md — Configure ESLint 9 + Prettier, add @snazzah/davey startup guard
 
 ### Phase 2: Source Migration
@@ -99,7 +99,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. TypeScript Foundation | 0/2 | Planning complete | - |
+| 1. TypeScript Foundation | 1/2 | In Progress | - |
 | 2. Source Migration | 0/TBD | Not started | - |
 | 3. Setup Wizard | 0/TBD | Not started | - |
 | 4. Command Audit | 0/TBD | Not started | - |

@@ -9,12 +9,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### TypeScript Foundation
 
-- [ ] **TSF-01**: Project compiles with TypeScript strict mode (`strict: true`) and `module: "NodeNext"`
-- [ ] **TSF-02**: Shared type interfaces defined (`CommandModule`, `EventModule`, `QueueMetadata`)
-- [ ] **TSF-03**: Build pipeline configured — `npm run build` (tsc), `npm run dev` (tsx watch), `npm start` (node dist/)
+- [x] **TSF-01**: Project compiles with TypeScript strict mode (`strict: true`) and `module: "NodeNext"`
+- [x] **TSF-02**: Shared type interfaces defined (`CommandModule`, `EventModule`, `QueueMetadata`)
+- [x] **TSF-03**: Build pipeline configured — `npm run build` (tsc), `npm run dev` (tsx watch), `npm start` (node dist/)
 - [ ] **TSF-04**: ESLint 9 flat config with `typescript-eslint` unified package configured
 - [ ] **TSF-05**: Prettier configured with consistent formatting rules
-- [ ] **TSF-06**: `discord-player` pinned exactly at `7.2.0` (no caret) to prevent version drift
+- [x] **TSF-06**: `discord-player` pinned exactly at `7.2.0` (no caret) to prevent version drift
 - [ ] **TSF-07**: `@snazzah/davey` startup check — throws descriptive error if package missing
 
 ### Source Migration
@@ -103,12 +103,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TSF-01 | Phase 1 | Pending |
-| TSF-02 | Phase 1 | Pending |
-| TSF-03 | Phase 1 | Pending |
+| TSF-01 | Phase 1 | Complete |
+| TSF-02 | Phase 1 | Complete |
+| TSF-03 | Phase 1 | Complete |
 | TSF-04 | Phase 1 | Pending |
 | TSF-05 | Phase 1 | Pending |
-| TSF-06 | Phase 1 | Pending |
+| TSF-06 | Phase 1 | Complete |
 | TSF-07 | Phase 1 | Pending |
 | MIG-01 | Phase 2 | Pending |
 | MIG-02 | Phase 2 | Pending |
