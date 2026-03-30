@@ -47,7 +47,12 @@ Plans:
   3. `willPlayTrack` handler is typed with all 4 parameters and calling the resolver does not require a runtime workaround
   4. No `PlayDLExtractor.js` file exists in the repository
   5. All 14 slash commands are registered and respond without crashing after migration
-**Plans**: TBD
+**Plans:** 4 plans
+Plans:
+- [ ] 02-01-PLAN.md — Update QueueMetadata type, migrate 3 utility files, delete PlayDLExtractor
+- [ ] 02-02-PLAN.md — Migrate YtDlpExtractor, event handlers, and button handler
+- [ ] 02-03-PLAN.md — Migrate all 14 slash command files to TypeScript
+- [ ] 02-04-PLAN.md — Migrate bootstrap index.ts, finalize tsconfig (allowJs: false)
 
 ### Phase 3: Setup Wizard
 **Goal**: A non-technical user on macOS, Linux, or Windows can run one command and end up with a working bot — including system dependency installation, `.env` generation, build step, and slash command registration
@@ -96,12 +101,12 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. TypeScript Foundation | 3/3 | Complete | 2026-03-29 |
-| 2. Source Migration | 0/TBD | Not started | - |
+| 2. Source Migration | 0/4 | Planned | - |
 | 3. Setup Wizard | 0/TBD | Not started | - |
 | 4. Command Audit | 0/TBD | Not started | - |
 | 5. Docker | 0/TBD | Not started | - |
