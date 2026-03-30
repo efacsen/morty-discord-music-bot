@@ -4,6 +4,7 @@ import type {
   SlashCommandBuilder,
   TextBasedChannel,
   User,
+  VoiceBasedChannel,
 } from 'discord.js'
 
 export interface CommandModule {
@@ -20,6 +21,7 @@ export interface EventModule {
 export interface QueueMetadata {
   channel: TextBasedChannel
   requestedBy: User
+  voiceChannel: VoiceBasedChannel
 }
 
 declare module 'discord.js' {
