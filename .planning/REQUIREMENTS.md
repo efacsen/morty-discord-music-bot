@@ -19,7 +19,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Source Migration
 
-- [ ] **MIG-01**: All 14 slash commands converted to TypeScript with proper types
+- [x] **MIG-01**: All 14 slash commands converted to TypeScript with proper types
 - [x] **MIG-02**: `YtDlpExtractor` migrated to TypeScript with typed `BaseExtractor` extension
 - [ ] **MIG-03**: `willPlayTrack` listener typed with all 4 parameters (queue, track, config, resolver)
 - [x] **MIG-04**: Event handlers (`ready.js`, `interactionCreate.js`) converted to TypeScript
@@ -110,7 +110,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TSF-05 | Phase 1 | Complete |
 | TSF-06 | Phase 1 | Complete |
 | TSF-07 | Phase 1 | Complete |
-| MIG-01 | Phase 2 | Pending |
+| MIG-01 | Phase 2 | Complete |
 | MIG-02 | Phase 2 | Complete |
 | MIG-03 | Phase 2 | Pending |
 | MIG-04 | Phase 2 | Complete |
@@ -148,4 +148,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-29*
-*Last updated: 2026-03-30 after completing Phase 2 Plan 2 requirement updates*
+*Last updated: 2026-03-30 after completing Phase 2 Plan 3 requirement updates*
