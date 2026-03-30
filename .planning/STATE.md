@@ -4,17 +4,17 @@ milestone: v1.0
 milestone_name: milestone
 current_phase: 2
 current_phase_name: source migration
-current_plan: 2
+current_plan: 3
 status: Ready to execute
-stopped_at: Completed 02-source-migration-01-PLAN.md
-last_updated: "2026-03-30T02:05:32.256Z"
+stopped_at: Completed 02-source-migration-02-PLAN.md
+last_updated: "2026-03-30T02:19:03.252Z"
 last_activity: 2026-03-30
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 7
-  completed_plans: 4
-  percent: 57
+  completed_plans: 5
+  percent: 71
 ---
 
 # Project State
@@ -24,39 +24,41 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-29)
 
 **Core value:** A non-technical user can go from `git clone` to a working Discord music bot in one command, on any OS (macOS, Linux, Windows).
-**Current focus:** Phase 1 complete; next up is Phase 2 — Source Migration
+**Current focus:** Phase 2 in progress; next up is Plan 3 — command migration
 
 ## Current Position
 
 **Current Phase:** 2
 **Current Phase Name:** source migration
 **Total Phases:** 6
-**Current Plan:** 2
+**Current Plan:** 3
 **Total Plans in Phase:** 4
 **Status:** Ready to execute
 **Last Activity:** 2026-03-30
-**Last Activity Description:** Phase 01 complete, transitioned to Phase 2
-**Progress:** [██████░░░░] 57%
+**Last Activity Description:** Completed 02-source-migration-02-PLAN.md; ready for Phase 2 Plan 3
+**Progress:** [███████░░░] 71%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 53m
-- Total execution time: 160m
+- Total plans completed: 5
+- Average duration: 34m
+- Total execution time: 172m
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 | 3 | 160m | 53m |
+| 02 | 2 | 12m | 6m |
 
 **Recent Trend:**
-- Last 5 plans: 01-03 (154m), 01-02 (4m), 01-01 (2m)
-- Trend: Phase 1 complete; ready for Source Migration planning
+- Last 5 plans: 02-02 (2m), 02-01 (10m), 01-03 (154m), 01-02 (4m), 01-01 (2m)
+- Trend: Phase 2 runtime module migration is complete through Plan 2; command migration is next
 
 *Updated after each plan completion*
 | Phase 02 P01 | 10m | 2 tasks | 8 files |
+| Phase 02-source-migration P02 | 2m | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -75,6 +77,8 @@ Recent decisions affecting current work:
 - [Phase 01-typescript-foundation]: Use a dynamic import() guard before client construction to fail fast when @snazzah/davey is unavailable.
 - [Phase 02]: Preserved utility logic exactly during migration so Phase 2 changes stay type-focused.
 - [Phase 02]: Kept .js relative import specifiers in TypeScript sources so tsx and compiled NodeNext output resolve consistently.
+- [Phase 02-source-migration]: Used targeted assertions at yt-dlp-wrap and discord-player playlist boundaries to preserve the existing extractor logic under strict TypeScript.
+- [Phase 02-source-migration]: Kept EventModule exports on the shared unknown[] signature and cast concrete Discord types inside each event handler body.
 
 ### Pending Todos
 
@@ -88,6 +92,6 @@ None yet.
 
 ## Session
 
-**Last Date:** 2026-03-30T02:05:32.255Z
-**Stopped At:** Completed 02-source-migration-01-PLAN.md
+**Last Date:** 2026-03-30T02:19:03.250Z
+**Stopped At:** Completed 02-source-migration-02-PLAN.md
 **Resume File:** None

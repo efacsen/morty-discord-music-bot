@@ -20,10 +20,10 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Source Migration
 
 - [ ] **MIG-01**: All 14 slash commands converted to TypeScript with proper types
-- [ ] **MIG-02**: `YtDlpExtractor` migrated to TypeScript with typed `BaseExtractor` extension
+- [x] **MIG-02**: `YtDlpExtractor` migrated to TypeScript with typed `BaseExtractor` extension
 - [ ] **MIG-03**: `willPlayTrack` listener typed with all 4 parameters (queue, track, config, resolver)
-- [ ] **MIG-04**: Event handlers (`ready.js`, `interactionCreate.js`) converted to TypeScript
-- [ ] **MIG-05**: Button handler converted to TypeScript with typed interaction routing
+- [x] **MIG-04**: Event handlers (`ready.js`, `interactionCreate.js`) converted to TypeScript
+- [x] **MIG-05**: Button handler converted to TypeScript with typed interaction routing
 - [x] **MIG-06**: Utility functions (`createPlayerEmbed`, `createSongSelectionEmbed`, `formatTime`) converted to TypeScript
 - [ ] **MIG-07**: `src/index.ts` bootstrap file migrated with typed Player and Client setup
 - [ ] **MIG-08**: All 14 slash commands verified working after migration (no regressions)
@@ -111,10 +111,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TSF-06 | Phase 1 | Complete |
 | TSF-07 | Phase 1 | Complete |
 | MIG-01 | Phase 2 | Pending |
-| MIG-02 | Phase 2 | Pending |
+| MIG-02 | Phase 2 | Complete |
 | MIG-03 | Phase 2 | Pending |
-| MIG-04 | Phase 2 | Pending |
-| MIG-05 | Phase 2 | Pending |
+| MIG-04 | Phase 2 | Complete |
+| MIG-05 | Phase 2 | Complete |
 | MIG-06 | Phase 2 | Complete |
 | MIG-07 | Phase 2 | Pending |
 | MIG-08 | Phase 2 | Pending |
@@ -148,4 +148,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-29*
-*Last updated: 2026-03-29 after roadmap creation — all 37 requirements mapped to 6 phases*
+*Last updated: 2026-03-30 after completing Phase 2 Plan 2 requirement updates*
