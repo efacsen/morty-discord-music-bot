@@ -24,10 +24,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **MIG-03**: `willPlayTrack` listener typed with all 4 parameters (queue, track, config, resolver)
 - [ ] **MIG-04**: Event handlers (`ready.js`, `interactionCreate.js`) converted to TypeScript
 - [ ] **MIG-05**: Button handler converted to TypeScript with typed interaction routing
-- [ ] **MIG-06**: Utility functions (`createPlayerEmbed`, `createSongSelectionEmbed`, `formatTime`) converted to TypeScript
+- [x] **MIG-06**: Utility functions (`createPlayerEmbed`, `createSongSelectionEmbed`, `formatTime`) converted to TypeScript
 - [ ] **MIG-07**: `src/index.ts` bootstrap file migrated with typed Player and Client setup
 - [ ] **MIG-08**: All 14 slash commands verified working after migration (no regressions)
-- [ ] **MIG-09**: Legacy `PlayDLExtractor.js` removed (inactive, not registered)
+- [x] **MIG-09**: Legacy `PlayDLExtractor.js` removed (inactive, not registered)
 
 ### Setup Wizard
 
@@ -115,10 +115,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MIG-03 | Phase 2 | Pending |
 | MIG-04 | Phase 2 | Pending |
 | MIG-05 | Phase 2 | Pending |
-| MIG-06 | Phase 2 | Pending |
+| MIG-06 | Phase 2 | Complete |
 | MIG-07 | Phase 2 | Pending |
 | MIG-08 | Phase 2 | Pending |
-| MIG-09 | Phase 2 | Pending |
+| MIG-09 | Phase 2 | Complete |
 | WIZ-01 | Phase 3 | Pending |
 | WIZ-02 | Phase 3 | Pending |
 | WIZ-03 | Phase 3 | Pending |

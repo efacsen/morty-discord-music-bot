@@ -49,7 +49,7 @@ Plans:
   5. All 14 slash commands are registered and respond without crashing after migration
 **Plans:** 4 plans
 Plans:
-- [ ] 02-01-PLAN.md — Update QueueMetadata type, migrate 3 utility files, delete PlayDLExtractor
+- [x] 02-01-PLAN.md — Update QueueMetadata type, migrate 3 utility files, delete PlayDLExtractor
 - [ ] 02-02-PLAN.md — Migrate YtDlpExtractor, event handlers, and button handler
 - [ ] 02-03-PLAN.md — Migrate all 14 slash command files to TypeScript
 - [ ] 02-04-PLAN.md — Migrate bootstrap index.ts, finalize tsconfig (allowJs: false)
@@ -106,7 +106,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. TypeScript Foundation | 3/3 | Complete | 2026-03-29 |
-| 2. Source Migration | 0/4 | Planned | - |
+| 2. Source Migration | 1/4 | In Progress | - |
 | 3. Setup Wizard | 0/TBD | Not started | - |
 | 4. Command Audit | 0/TBD | Not started | - |
 | 5. Docker | 0/TBD | Not started | - |
