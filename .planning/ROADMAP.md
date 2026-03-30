@@ -13,7 +13,7 @@ Morty is a working Discord music bot being refactored for open-source release. T
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: TypeScript Foundation** - Establish compiler config, shared types, and build pipeline that all subsequent phases depend on
-- [ ] **Phase 2: Source Migration** - Convert all JavaScript source files to TypeScript in dependency order
+- [x] **Phase 2: Source Migration** - Convert all JavaScript source files to TypeScript in dependency order
 - [ ] **Phase 3: Setup Wizard** - Update cross-platform setup wizard to handle the TypeScript build step
 - [ ] **Phase 4: Command Audit** - Verify all 14 commands work in a live server post-migration
 - [ ] **Phase 5: Docker** - Update Dockerfile and docker-compose for TypeScript build after all testing is complete
@@ -52,7 +52,7 @@ Plans:
 - [x] 02-01-PLAN.md — Update QueueMetadata type, migrate 3 utility files, delete PlayDLExtractor
 - [x] 02-02-PLAN.md — Migrate YtDlpExtractor, event handlers, and button handler
 - [x] 02-03-PLAN.md — Migrate all 14 slash command files to TypeScript
-- [ ] 02-04-PLAN.md — Migrate bootstrap index.ts, finalize tsconfig (allowJs: false)
+- [x] 02-04-PLAN.md — Migrate bootstrap index.ts, finalize tsconfig (allowJs: false)
 
 ### Phase 3: Setup Wizard
 **Goal**: A non-technical user on macOS, Linux, or Windows can run one command and end up with a working bot — including system dependency installation, `.env` generation, build step, and slash command registration
@@ -106,7 +106,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. TypeScript Foundation | 3/3 | Complete | 2026-03-29 |
-| 2. Source Migration | 3/4 | In Progress | - |
+| 2. Source Migration | 4/4 | Complete | 2026-03-30 |
 | 3. Setup Wizard | 0/TBD | Not started | - |
 | 4. Command Audit | 0/TBD | Not started | - |
 | 5. Docker | 0/TBD | Not started | - |
