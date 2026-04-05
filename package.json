@@ -11,8 +11,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.ts\"",
-    "check": "node check-system.js",
-    "clear-commands": "node clear-commands.js"
+    "check": "tsx scripts/check-system.ts",
+    "clear-commands": "tsx scripts/clear-commands.ts"
   },
   "repository": {
     "type": "git",
