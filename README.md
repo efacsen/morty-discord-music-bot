@@ -1,8 +1,20 @@
+```
+  __  __            _
+ |  \/  | ___  _ __| |_ _   _
+ | |\/| |/ _ \| '__| __| | | |
+ | |  | | (_) | |  | |_| |_| |
+ |_|  |_|\___/|_|   \__|\__, |
+                          |___/
+       Discord Music Bot
+```
+
 # Morty Music Bot
+
+> *"Oh geez, y-you want music? I can do that!"*
 
 A free, open-source Discord music bot with YouTube support. Built with Discord.js v14 and discord-player v7.
 
-**Made by [efacsen](https://github.com/efacsen).**
+**Made by [efacsen](https://github.com/efacsen). No paywalls. No premium. Just music.**
 
 ---
 
@@ -143,3 +155,7 @@ docker-compose down            # Stop
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+---
+
+> *"I-I know it's just a music bot, but... I think it's pretty good, you know?"*
