@@ -214,13 +214,7 @@ player.events.on('emptyQueue', (queue) => {
   getGuildTextChannel(meta).send("That's all the songs! W-we're done, I think.")
 })
 
-player.events.on('error', (queue, error) => {
-  console.error(`❌ Player error: ${error.message}`)
-  console.error(`❌ Full error object:`, error)
-  console.error(`❌ Error stack:`, error.stack)
-  const meta = queue.metadata as QueueMetadata
-  getGuildTextChannel(meta).send(`❌ An error occurred: ${error.message}`)
-})
+// Duplicate error handler removed — already handled at line 124
 
 // Monitor voice connection state changes
 player.events.on('connection', (queue) => {
@@ -265,7 +259,7 @@ player.events.on(
 // Load command files dynamically
 const commandsPath = join(__dirname, 'commands')
 const commandFiles = readdirSync(commandsPath).filter(
-  (file) => file.endsWith('.ts') || file.endsWith('.js'),
+  (file) => (file.endsWith('.ts') || file.endsWith('.js')) && !file.endsWith('.d.ts'),
 )
 
 for (const file of commandFiles) {
@@ -283,7 +277,9 @@ for (const file of commandFiles) {
 
 // Load event files dynamically
 const eventsPath = join(__dirname, 'events')
-const eventFiles = readdirSync(eventsPath).filter((file) => file.endsWith('.ts') || file.endsWith('.js'))
+const eventFiles = readdirSync(eventsPath).filter(
+  (file) => (file.endsWith('.ts') || file.endsWith('.js')) && !file.endsWith('.d.ts'),
+)
 
 for (const file of eventFiles) {
   const mod = (await import(join(eventsPath, file.replace(/\.ts$/, '.js')))) as {

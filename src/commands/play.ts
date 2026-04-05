@@ -88,7 +88,7 @@ const command: CommandModule = {
           leaveOnEnd: true,
           leaveOnEndCooldown: 300000,
           volume: 50,
-          bufferingTimeout: 3000,
+          bufferingTimeout: 15000,
         })
       }
 

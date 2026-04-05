@@ -13,7 +13,14 @@ import {
 } from 'discord-player'
 import YTDlpWrapImport from 'yt-dlp-wrap'
 
-const YTDlpWrap = YTDlpWrapImport as unknown as typeof import('yt-dlp-wrap').default
+// yt-dlp-wrap is a CJS module with `exports.default = YTDlpWrap`.
+// Node's ESM interop may deliver either the class directly or the module
+// namespace object — handle both by unwrapping `.default` if present.
+const YTDlpWrap = (
+  typeof YTDlpWrapImport === 'function'
+    ? YTDlpWrapImport
+    : (YTDlpWrapImport as { default: unknown }).default
+) as typeof import('yt-dlp-wrap').default
 type YTDlpWrapInstance = InstanceType<typeof YTDlpWrap>
 
 interface YtDlpThumbnail {
@@ -189,7 +196,7 @@ export class YtDlpExtractor extends BaseExtractor<object> {
         '--dump-json',
         '--no-playlist',
         '--extractor-args',
-        'youtube:player_client=android_music,ios,mweb,web',
+        'youtube:player_client=tv,default',
         '--no-warnings',
         ...this.getCookieArgs(),
       ]
@@ -247,7 +254,7 @@ export class YtDlpExtractor extends BaseExtractor<object> {
         '--flat-playlist',
         '--yes-playlist',
         '--extractor-args',
-        'youtube:player_client=android_music,ios,mweb,web',
+        'youtube:player_client=tv,default',
         '--no-warnings',
         ...this.getCookieArgs(),
       ]
@@ -341,7 +348,7 @@ export class YtDlpExtractor extends BaseExtractor<object> {
         '-',
         '--no-playlist',
         '--extractor-args',
-        'youtube:player_client=android_music,ios,mweb,web',
+        'youtube:player_client=tv,default',
         '--no-warnings',
         ...this.getCookieArgs(),
       ])
@@ -349,13 +356,15 @@ export class YtDlpExtractor extends BaseExtractor<object> {
       let chunkCount = 0
       let totalBytes = 0
 
-      ytdlpStream.on('data', (chunk: Buffer) => {
-        const buffer = chunk as Buffer
+      // Track progress on the PassThrough (destination) side to avoid
+      // interfering with pipe backpressure by adding a data listener
+      // on the source stream.
+      passThrough.on('data', (chunk: Buffer) => {
         chunkCount++
-        totalBytes += buffer.length
+        totalBytes += chunk.length
         if (chunkCount <= 3 || chunkCount % 200 === 0) {
           console.log(
-            `[YtDlp Stream] Chunk #${chunkCount}: ${buffer.length} bytes (total: ${totalBytes})`,
+            `[YtDlp Stream] Chunk #${chunkCount}: ${chunk.length} bytes (total: ${totalBytes})`,
           )
         }
       })
@@ -367,6 +376,14 @@ export class YtDlpExtractor extends BaseExtractor<object> {
       ytdlpStream.on('error', (error: Error) => {
         console.error('[YtDlp Stream] Error:', error.message)
         passThrough.destroy(error)
+      })
+
+      // Handle yt-dlp process crashing or exiting unexpectedly
+      ytdlpStream.on('close', () => {
+        if (!passThrough.destroyed) {
+          console.log('[YtDlp Stream] Source closed, ending PassThrough')
+          passThrough.end()
+        }
       })
 
       passThrough.on('close', () => {
