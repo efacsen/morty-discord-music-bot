@@ -1,0 +1,20 @@
+# Mark cross-platform install/run scripts as vendored so GitHub Linguist
+# excludes them from language statistics. These are supporting tooling,
+# not application source code.
+setup.sh          linguist-vendored
+setup.bat         linguist-vendored
+start.sh          linguist-vendored
+start.bat         linguist-vendored
+start-bot.sh      linguist-vendored
+stop.sh           linguist-vendored
+stop.bat          linguist-vendored
+scripts/*.ps1     linguist-vendored
+
+# ESLint flat config — tool configuration, not source
+eslint.config.js  linguist-vendored
+
+# Dockerfile is infra, not source
+Dockerfile        linguist-vendored
+
+# Ensure shell scripts always use LF line endings
+*.sh              text eol=lf
