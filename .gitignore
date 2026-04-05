@@ -17,6 +17,9 @@ youtube_cookies.txt
 # Portable runtime (downloaded by setup.bat)
 runtime/
 
+# TypeScript build output
+dist/
+
 # Binaries (should be installed via package managers)
 yt-dlp
 ffmpeg
