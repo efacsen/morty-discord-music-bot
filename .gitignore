@@ -7,6 +7,7 @@ node_modules/
 # YouTube cookies (contains sensitive auth data)
 youtube_cookies.txt
 *_cookies.txt
+cookies/*.txt
 
 # Internal development notes (not for public repo)
 .dev-notes/

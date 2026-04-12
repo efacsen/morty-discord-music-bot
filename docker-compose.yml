@@ -25,9 +25,16 @@ services:
       - .env
     environment:
       - YTDLP_PATH=/ytdlp/yt-dlp
+    healthcheck:
+      test: ["CMD-SHELL", "kill -0 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     volumes:
       - discord-player-cache:/app/.discord-player
       - ytdlp-bin:/ytdlp:ro
+      - ./cookies:/cookies:ro
     logging:
       driver: json-file
       options:
