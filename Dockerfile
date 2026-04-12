@@ -1,8 +1,9 @@
-# ── Stage 1: Build ───────────────────────────────────────────────────────────
-FROM node:20-alpine AS builder
+# ── Build-time platform args (populated by Docker buildx) ─────────────────────
+ARG BUILDPLATFORM
+ARG TARGETPLATFORM
 
-# Native addon compilation tools (mediaplex, @snazzah/davey use N-API)
-RUN apk add --no-cache python3 make g++
+# ── Stage 1: Build ───────────────────────────────────────────────────────────
+FROM --platform=$BUILDPLATFORM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -13,32 +14,30 @@ COPY tsconfig.json ./
 COPY src/ ./src/
 RUN npm run build
 
-# Strip dev dependencies — production image will copy this pruned node_modules
-RUN npm prune --omit=dev
-
 # ── Stage 2: Production ───────────────────────────────────────────────────────
-FROM node:20-alpine AS production
+FROM --platform=$TARGETPLATFORM node:20-alpine AS production
 
+# python3/make/g++ are fallback build tools if NAPI-RS prebuilts don't exist for musl ARM64
 # ffmpeg: audio processing
-# python3 + py3-pip: required to run yt-dlp (pip-installed Python script)
-RUN apk add --no-cache ffmpeg python3 py3-pip && \
-    pip3 install --break-system-packages yt-dlp
+RUN apk add --no-cache python3 make g++ ffmpeg
 
 WORKDIR /app
 
-# Copy compiled JS and pruned production node_modules from builder
+# Install correct-arch prebuilts for TARGETPLATFORM (independent of builder node_modules)
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+# Copy compiled JS only — do NOT copy node_modules from builder
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY package.json ./
+
+COPY entrypoint.sh ./
 
 # Cache directory for discord-player
-RUN mkdir -p .discord-player
-
-# Non-root user for security
-RUN addgroup -g 1001 -S nodejs && \
+RUN mkdir -p .discord-player && \
+    addgroup -g 1001 -S nodejs && \
     adduser -S nodejs -u 1001 && \
     chown -R nodejs:nodejs /app
 
 USER nodejs
 
-CMD ["node", "dist/index.js"]
+ENTRYPOINT ["/bin/sh", "entrypoint.sh"]
