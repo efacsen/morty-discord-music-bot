@@ -145,9 +145,9 @@ rm -rf node_modules && npm install
 ## Docker
 
 ```bash
-docker-compose up -d           # Start
-docker-compose logs -f bot     # Logs
-docker-compose down            # Stop
+docker compose up --build -d   # Start
+docker compose logs -f bot     # Logs
+docker compose down            # Stop
 ```
 
 ---
