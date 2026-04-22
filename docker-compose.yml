@@ -15,7 +15,10 @@ services:
       start_period: 60s
 
   bot:
-    image: ghcr.io/${IMAGE_NAME:-yourorg/discord-music-bot}:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: discord-music-bot:local
     container_name: discord-music-bot
     restart: unless-stopped
     depends_on:
