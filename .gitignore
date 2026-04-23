@@ -1,4 +1,5 @@
 .env
+.worktrees/
 node_modules/
 *.log
 .DS_Store
@@ -7,6 +8,7 @@ node_modules/
 # YouTube cookies (contains sensitive auth data)
 youtube_cookies.txt
 *_cookies.txt
+cookies/*.txt
 
 # Internal development notes (not for public repo)
 .dev-notes/
@@ -24,3 +26,28 @@ dist/
 yt-dlp
 ffmpeg
 ffprobe
+
+# ── GSD baseline (auto-generated) ──
+.gsd
+.gsd-id
+.bg-shell/
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+.env.*
+!.env.example
+.next/
+build/
+__pycache__/
+*.pyc
+.venv/
+venv/
+target/
+vendor/
+coverage/
+.cache/
+tmp/

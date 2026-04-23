@@ -1,13 +1,49 @@
-version: '3.8'
 services:
+  updater:
+    image: python:3.12-alpine
+    container_name: discord-music-bot-updater
+    restart: unless-stopped
+    volumes:
+      - ytdlp-bin:/ytdlp
+      - ./updater/update-ytdlp.sh:/update-ytdlp.sh:ro
+    command: ["/bin/sh", "/update-ytdlp.sh"]
+    healthcheck:
+      test: ["CMD", "/ytdlp/yt-dlp", "--version"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 60s
+
   bot:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: discord-music-bot:local
     container_name: discord-music-bot
     restart: unless-stopped
+    depends_on:
+      updater:
+        condition: service_healthy
     env_file:
       - .env
+    environment:
+      - YTDLP_PATH=/ytdlp/yt-dlp
+    healthcheck:
+      test: ["CMD-SHELL", "kill -0 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     volumes:
-      - ./src:/app/src
       - discord-player-cache:/app/.discord-player
+      - ytdlp-bin:/ytdlp:ro
+      - ./cookies:/cookies:ro
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
 volumes:
   discord-player-cache:
+  ytdlp-bin:

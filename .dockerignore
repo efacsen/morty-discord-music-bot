@@ -1,0 +1,40 @@
+node_modules
+dist
+.git
+.gitignore
+.env
+*.log
+.DS_Store
+
+# Credentials / cookies — never bake these into the image
+youtube_cookies.txt
+*_cookies.txt
+
+# Binaries committed locally (installed inside the image instead)
+yt-dlp
+ffmpeg
+ffprobe
+
+# Dev/docs not needed at runtime
+.dev-notes
+.planning
+.claude
+developers
+docs
+.github
+
+# Convenience scripts (not needed in container)
+setup.sh
+setup.bat
+start.sh
+start.bat
+stop.sh
+stop.bat
+start-bot.sh
+
+# Docs
+README.md
+CHANGELOG.md
+CONTRIBUTING.md
+TROUBLESHOOTING.md
+LICENSE
