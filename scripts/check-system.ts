@@ -101,12 +101,14 @@ if (existsSync('.env')) {
   }
 } else {
   console.log('⚠️  .env file: Not found')
-  console.log('   Create .env file from .env.example:')
+  console.log('   Create .env file from .env.example or use the interactive onboarding:')
 
   if (platform() === 'win32') {
-    console.log('   - Windows: Copy-Item .env.example .env')
+    console.log('   - Windows: onboard.bat')
+    console.log('   - Or copy manually: Copy-Item .env.example .env')
   } else {
-    console.log('   - macOS/Linux: cp .env.example .env')
+    console.log('   - macOS/Linux: ./onboard.sh')
+    console.log('   - Or copy manually: cp .env.example .env')
   }
 
   console.log('   Then fill in your Discord bot credentials\n')

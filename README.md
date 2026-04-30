@@ -51,10 +51,21 @@ winget install OpenJS.NodeJS Gyan.FFmpeg yt-dlp
 git clone https://github.com/efacsen/morty-discord-music-bot.git
 cd morty-discord-music-bot
 npm install
+```
+
+**Recommended:** let the terminal create `.env` for you:
+
+```bash
+./onboard.sh
+```
+
+If you prefer to edit it yourself instead:
+
+```bash
 cp .env.example .env
 ```
 
-Edit `.env` with your credentials:
+If you want a plain-language walkthrough, read [docs/ENV-ONBOARDING.md](docs/ENV-ONBOARDING.md) first:
 
 ```env
 DISCORD_CLIENT_TOKEN=your_bot_token_here

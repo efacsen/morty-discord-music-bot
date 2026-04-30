@@ -42,18 +42,36 @@ Without authentication, you'll see errors like:
    - Click "Export" or "Export As" button
    - Choose "Netscape" format (default)
 5. **Save the file**:
-   - Save it as `youtube_cookies.txt`
-   - Place it in your bot's root directory (same folder as `package.json`)
+   - Save it as `cookies.txt`
+   - If running with Node directly, place it next to your `.env`
+   - If running with Docker, place it in the repo's `cookies/` directory as `cookies/cookies.txt`
 
 ### Step 3: Verify the Setup
 
-1. Make sure `youtube_cookies.txt` is in your bot's root directory
-2. Check that your `.env` file has this line:
-   ```
-   YOUTUBE_COOKIE_PATH=./youtube_cookies.txt
-   ```
-3. Restart your bot with `npm start`
-4. You should see: `✅ YouTube cookies loaded successfully`
+Use the env variable that matches how you run the bot.
+
+**Node / local setup**
+
+```dotenv
+YTDLP_COOKIES_FILE=./cookies.txt
+```
+
+**Docker / docker compose setup**
+
+```dotenv
+YTDLP_COOKIES_FILE=/cookies/cookies.txt
+```
+
+Optional alternative for local setups:
+
+```dotenv
+YTDLP_COOKIES_BROWSER=chrome
+```
+
+Then restart the bot.
+
+- Local Node: `npm start`
+- Docker: `docker compose restart bot`
 
 ## Security Warnings
 
@@ -77,9 +95,9 @@ The bot will still work without premium, but:
 ## Troubleshooting
 
 ### "No YouTube cookies found" message
-- Check that `youtube_cookies.txt` exists in the root directory
-- Verify the path in `.env` is correct
-- Make sure the file isn't named `youtube_cookies.txt.txt` (Windows may hide extensions)
+- Check that your exported `cookies.txt` file exists where you expect it
+- Verify the path in `.env` is correct (`./cookies.txt` for local Node or `/cookies/cookies.txt` for Docker)
+- Make sure the file isn't accidentally named `cookies.txt.txt` (Windows may hide extensions)
 
 ### Still getting "No valid URL to decipher"
 1. Try re-exporting fresh cookies
@@ -114,12 +132,12 @@ When you export cookies:
 
 If multiple people are hosting the bot:
 1. **Option A**: Each person exports their own cookies
-   - Each host maintains their own `youtube_cookies.txt`
+   - Each host maintains their own exported `cookies.txt`
    - Not committed to git repository
 
 2. **Option B**: Use a shared YouTube account
    - Create a dedicated YouTube account for the bot
-   - All hosts use the same `youtube_cookies.txt` file
+   - All hosts use the same exported cookie file
    - Share securely (encrypted messaging, not email)
    - Update when cookies expire
 

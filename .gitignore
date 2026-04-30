@@ -13,6 +13,9 @@ cookies/*.txt
 # Internal development notes (not for public repo)
 .dev-notes/
 
+# Local MCP server config (machine-specific absolute paths)
+.mcp.json
+
 # Temp/cache files
 *-player-script.js
 

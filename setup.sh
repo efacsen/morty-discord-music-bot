@@ -139,34 +139,8 @@ fi
 
 if [ ! -f ".env" ]; then
     echo ""
-    print_info "Let's configure your Discord bot!"
-    echo ""
-    print_info "You'll need to create a Discord bot if you haven't already:"
-    print_info "1. Go to https://discord.com/developers/applications"
-    print_info "2. Click 'New Application' and give it a name"
-    print_info "3. Go to 'Bot' section and click 'Add Bot'"
-    print_info "4. Copy the bot token"
-    print_info "5. Go to OAuth2 > URL Generator"
-    print_info "   - Select 'bot' and 'applications.commands'"
-    print_info "   - Select permissions: Send Messages, Connect, Speak"
-    print_info "   - Copy the generated URL and invite bot to your server"
-    echo ""
-
-    read -p "Enter your Discord Bot Token: " DISCORD_TOKEN
-    read -p "Enter your Discord Client ID (Application ID): " CLIENT_ID
-    read -p "Enter your Discord Guild ID (Server ID): " GUILD_ID
-
-    cat > .env << EOF
-# Discord Bot Configuration
-DISCORD_CLIENT_TOKEN=$DISCORD_TOKEN
-DISCORD_CLIENT_ID=$CLIENT_ID
-DISCORD_GUILD_ID=$GUILD_ID
-
-# YouTube Configuration (Optional)
-# YOUTUBE_COOKIE_PATH=./youtube_cookies.txt
-EOF
-
-    print_success ".env file created"
+    print_info "Launching interactive env onboarding..."
+    ./onboard.sh
 fi
 
 # Final success message

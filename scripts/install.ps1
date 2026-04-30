@@ -183,32 +183,8 @@ else {
 
 if ($needConfig) {
     Write-Host ""
-    Write-Host "  You need a Discord bot token to continue." -ForegroundColor White
-    Write-Host "  If you don't have one yet:" -ForegroundColor Gray
-    Write-Host "    1. Go to https://discord.com/developers/applications" -ForegroundColor Gray
-    Write-Host "    2. Click 'New Application' and give it a name" -ForegroundColor Gray
-    Write-Host "    3. Go to 'Bot' section and copy the token" -ForegroundColor Gray
-    Write-Host "    4. Go to OAuth2 > URL Generator" -ForegroundColor Gray
-    Write-Host "       Select 'bot' + 'applications.commands'" -ForegroundColor Gray
-    Write-Host "       Select permissions: Send Messages, Connect, Speak" -ForegroundColor Gray
-    Write-Host "       Copy URL and invite bot to your server" -ForegroundColor Gray
-    Write-Host ""
-
-    $token = Read-Host "  Enter your Discord Bot Token"
-    $clientId = Read-Host "  Enter your Discord Client ID (Application ID)"
-    $guildId = Read-Host "  Enter your Discord Guild/Server ID"
-
-    @"
-# Discord Bot Configuration
-DISCORD_CLIENT_TOKEN=$token
-DISCORD_CLIENT_ID=$clientId
-DISCORD_GUILD_ID=$guildId
-
-# YouTube Configuration (Optional)
-# YOUTUBE_COOKIE_PATH=./youtube_cookies.txt
-"@ | Set-Content $envFile -Encoding UTF8
-
-    Write-Ok ".env file created"
+    Write-Info "Launching interactive env onboarding..."
+    & (Join-Path $PSScriptRoot "onboard.ps1")
 }
 
 # --- Cleanup temp ---
